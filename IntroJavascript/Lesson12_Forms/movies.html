@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title> My Favorite Movies </title>
+  <meta charset="utf-8">
+  <script>
+     function Movie(title, rating, genre, description) {
+      this.title = title;
+      this.rating = rating;
+      this.genre = genre;
+      this.description = description;
+    }
+  
+    var movieList = [];					// create array to hold form values
+  
+    window.onload = init;
+  
+    function init() {
+      var submitButton = document.getElementById("submitButton");
+      submitButton.onclick = getMovieData;
+    }
+  
+    function getMovieData() {
+      var titleInput = document.getElementById("title"); // get movie title from DOM
+      var title = titleInput.value;
+  
+      var ratingInput = document.getElementById("rating");  // get rating from DOM
+      var rating = parseInt(ratingInput.value);	// get value from element, convert to number
+  
+      var genreSelect = document.getElementById("genre");		// need extra step here to get value from element
+      var genreOption = genreSelect.options[genreSelect.selectedIndex]; // (1) get array element of genreSelect using selectedIndex property, assign to temp var
+      var genre = genreOption.value;									// (2) get value from temp var
+  
+      var descriptionTextarea = document.getElementById("description");		// get value of text area element and store in description
+      var description = descriptionTextarea.value;
+  
+      if (title == null || title == "") {		// make sure title not empty
+        alert("Please enter a movie title");
+        return;
+      }
+	  
+	  if (genre == "comedy" && rating ==5)	{
+		  alert("wow, whats up with the great rating?");
+	  }
+      else {									
+        var movie = new Movie(title, rating, genre, description);	// create movie object using movie constructor
+        movieList.push(movie);					// put the movie object into the movieList array
+        var movies = document.getElementById("movies");
+        movies.innerHTML = "Added " + movie.title + " to the list.";
+      
+	  	 var theForm = document.getElementById("theForm");	// clear the form values before submitting next list object
+        theForm.reset();
+	  }
+	  
+    } 
+  </script>
+</head>
+<body>
+  <h1>Movie List Builder</h1>
+  <form id="theForm">
+    <label for="title">Movie title: </label>
+      <input id="title" name="title" type="text" size="30" required><br>
+    <label for="rating">Rating: </label>
+      1 <input id="rating" name="rating" type="range" max="5" min="1"> 5<br>
+    <label for="genre">Genre: </label>
+      <select id="genre" name="genre">
+        <option value="drama" selected>Drama</option>
+        <option value="action">Action</option>
+        <option value="comedy">Comedy</option>
+        <option value="scifi">Sci Fi</option>
+        <option value="thriller">Thriller</option>
+      </select><br>
+    <label for="description">Description:</label><br>
+      <textarea id="description" name="description"></textarea>
+    <br>
+    <input type="button" id="submitButton" value="Add movie!"><br>  
+  </form>
+  <div id="movies">
+  </div>            
+</body>
+</html>

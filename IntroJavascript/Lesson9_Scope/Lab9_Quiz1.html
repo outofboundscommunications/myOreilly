@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <title> Scope </title>
+ <meta charset="utf-8">
+ <script>
+ var random = 0;
+ var previousGuess = 0;
+ 
+ window.onload = init;
+ 
+ function init() {
+  // random will be a value between 1 and 10
+  random = Math.floor(Math.random() * 10) + 1;
+ 
+  var button = document.getElementById("submit");
+  button.onclick = getGuess;
+ }
+ 
+ function getGuess() {
+  var result = document.getElementById("result");
+ 
+  var guess = getUserEntry("guess");
+  if (guess == random) {
+  result.innerHTML = "Wow, you got it!";
+  }
+  else if (previousGuess == 0) {
+  previousGuess = guess;
+  result.innerHTML = "Good guess, but you didn't get it.";
+  }
+  else {
+  var diffWithGuess = Math.abs(random - guess);
+  var diffWithPrevGuess = Math.abs(random - previousGuess);
+  if (diffWithGuess > diffWithPrevGuess) {
+   result.innerHTML = "You're getting colder.";
+  }
+  else if (diffWithGuess < diffWithPrevGuess) {
+   result.innerHTML = "You're getting warmer.";
+  }
+  else {
+   result.innerHTML = "You still don't have it.";
+  }
+  previousGuess = guess;
+  }
+ }
+ 
+ function getUserEntry(id) {
+  var guessInput = document.getElementById(id);
+  var guessString = guessInput.value;
+ 
+  // make sure the user entered something
+  if (guessString == null || guessString.length == 0) {
+  alert("Please enter a number");
+  return 0;
+  }
+ 
+  var guess = parseInt(guessString);
+  // make sure what the user entered is a number
+  if (!isNaN(guess)) {
+  return guess;
+  }
+  else {
+  return 0;
+  }
+ }
+ </script>
+</head>
+<body>
+ <form>
+ <label for="guess">Enter a number between 1 and 10: </label>
+ <input type="number" id="guess" size="3"><br>
+ <input type="button" id="submit" value="Go!">
+ </form>
+ <br>
+ <div id="result">
+ </div> 
+</body>
+
+<!--
+Now answer these questions about scope:
+
+1.What are the global variables, if any, in this program?
+
+	var random = 0;
+ 	var previousGuess = 0;
+    
+2.For any variables you've identified as global, explain why they are global.
+
+	they are defined outside of any functions, at the top level
+    
+3.Identify the local variables of the function init()
+
+	var button
+
+4.Identify the local variables of the function getGuess()
+
+	var result
+    var guess
+    var diffWithGuess
+    var diffWithPrevGuess
+    
+5.Identify the local variables of the function getUserEntry()
+
+	var guessInput
+    var guessString
+    var guess
+	
+6.Is the parameter id to the functon getUserEntry() a global or a local variable?
+
+	local variable - parameter variables are always local variables.
+	
+Are there any global variables being shadowed by local variables in this program?
+
+	there are two global variables: var random and var previousGuess
+    those variables are used within functions but they are not declared locally within those functions
+
+-->
+
+</html>

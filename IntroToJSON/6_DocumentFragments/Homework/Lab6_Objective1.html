@@ -1,0 +1,115 @@
+<!--Objective 1:
+Complete the code for the program below to add the tweets in the tweets array to the page. Each tweet should use the same HTML as the sample tweet in the "tweets" <ul>. Use a document fragment to make your code more efficient.
+
+You can download the "tweetIcon.jpg" image by right-clicking on this image, saving it to your computer, and uploading it to the OST server using the File Browser.
+
+<body>
+<form>
+    <h1>Tweets</h1>
+    <input type="button" id="add" value="Add Tweets">
+    <ul id="tweets">
+        <li><img src="tweet.jpg"><span>This is my tweet</span></li>
+    </ul>
+</form>
+</body>
+</html> 
+
+-->
+
+<!doctype html>
+<html>
+<head>
+<title>JSON Course | Lab 6, Objective 1</title>
+<meta charset="utf-8">
+<style>
+body {
+font-family: Helvetica, Ariel, sans-serif;
+} 
+ul#tweets {
+	list-style-type:none;
+	margin-left: 10px;
+	padding-left: 10px;
+} 
+ul#tweets li {
+	padding: 5px;
+	margin: 5px;
+} 
+ul#tweets li span {
+	margin-right: 10px;
+} 
+
+img {
+	width: 70px;
+	vertical-align: middle;
+}
+</style>
+
+<script>
+
+window.onload = init;
+
+function init() {
+	// when user clicks on the 'add tweets' button, we call the addTweetsToPage(tweets) function
+	var addButton = document.getElementById("add");
+	addButton.onclick = addTweetsToPage;
+}
+
+// define the array of the tweets we want to display to page
+
+
+var tweets = [
+    "When teaching math, it shouldn't just be: 'Answer this question:'. It should also be: 'Question this answer:'",
+    "Another reason to choose @OReillySchool: quizzes and projects graded by humans!",
+    "@OReillySchool Excellent! I love the new APIs that came with it, as well as the new tags and attributes.",
+    "That's great. I am really grateful for your program and will definitely continue to encourage folks to enroll in courses!"];
+
+
+
+// function to add each tweet array element to a list item in document fragment
+// then we add that list fragment to the page to display the tweets
+function addTweetsToPage(mytweets)	{
+	var ul = document.getElementById("tweets");
+	var listFragment = document.createDocumentFragment();
+	for (var i=0; i< tweets.length; i++)	{
+		var tweetItem = tweets[i];
+		var li = createNewTweetItem(tweetItem);
+		listFragment.appendChild(li);
+	}
+	ul.appendChild(listFragment);
+}
+
+// pass the first tweet array element into this function
+// this function will then create all the child elements of the list item
+// and return this li item to the calling function, addTweeetsToPage(tweets)
+// which you see above
+
+function createNewTweetItem(tweetItem)	{
+	// create a new <li> element
+	var li = document.createElement("li");
+	// create a new <span> element 
+	var span = document.createElement("span");
+	// add the tweet into that span
+	span.innerHTML = tweetItem;
+	// append the span wrapped tweet to the <li> item
+	li.appendChild(span);
+	// now we create a new image element and point it to the image location
+	var img = new Image();
+	img.src = "tweetIcon.jpg";
+	// finally we insert this image element before the span 
+	li.insertBefore(img,li.firstChild);
+	return li;
+}
+</script>
+
+</head>
+
+<body>
+<form>
+    <h1>Tweets</h1>
+    <input type="button" id="add" value="Add Tweets">
+    <ul id="tweets">
+
+    </ul>
+</form>
+</body>
+</html>     

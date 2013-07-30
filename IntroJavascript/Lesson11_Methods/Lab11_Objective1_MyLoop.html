@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title> Lab 11 Objective 1 </title>
+  <meta charset="utf-8">
+  <script>
+  /* 
+  
+Add a method named updateRating() to the Movie object you created in the previous lab. This method should take one parameter and update the rating property of the movie object. Test your method by writing code to display a movie object's name and rating in the web page, in the "movies" <div>.
+
+Include comments in the code explaining what you're doing and why.
+
+Submit your file once you have it working.
+  
+  */
+ 
+ window.onload = init;
+ 
+ function Movie(title, year, genre, rating, showtimes) {	//object constuctor for the Movie object
+  this.title = title;										//the showtimes object is an array of times						
+  this.year = year;
+  this.genre = genre;
+  this.rating = rating;
+  this.showtimes = showtimes;
+  this.updateRating = function(myRating) {					// method to update movie rating with parameter
+	  this.rating = myRating;
+	  return myRating;   // do we need the return statement or not???
+	  }
+  }
+	
+    function init() {
+      // Here we create three movie objects using constructor	
+	  									
+	  var pulpfiction = new Movie("Pulp Fiction", "1995", "Drama", 5,["1:00 pm", "3:00 pm", "5:00 pm"]);
+      var topgun = new Movie("Top Gun", "1996", "Action", 3,["2:00 pm", "4:00 pm", "6:00 pm"]);
+	  var huckfin = new Movie("Huck Fin", "2006", "Children", 3,["2:00 pm", "4:00 pm", "6:00 pm"]);
+	
+		var div = document.getElementById("movies");  // get the 'movies' element from the DOM and assign to the 'div' variable
+	
+		var anArray = [pulpfiction, topgun, huckfin];  	// put the three movie objects into an array 
+		 for (var i = 0; i < anArray.length; i++) {		// iterate thru each element(object) of array and display in div/html
+				var theObj = anArray[i];					// create theObj variable and assign it to the first array element
+				if (theObj.title == "Top Gun")	{		// check to see if the movie is top gun, if so change rating
+				var theOldRating = theObj.rating;			// store top gun's original rating in a variable
+				var theNewRating = theObj.updateRating(1);	// call the movie object method,store the new rating
+				div.innerHTML += "The movie named: " + theObj.title + " was created in: " + theObj.year + "<br>";
+				div.innerHTML += "and its original rating was: " + theOldRating + "<br>";
+				div.innerHTML += "and its new rating is: " + theNewRating + "<br>";
+				div.innerHTML += "The show times today are:" + "<br>";
+					for (j = 0; j < theObj.showtimes.length; j++) {
+						if (j < theObj.showtimes.length -1) 	{
+							div.innerHTML += theObj.showtimes[j] + ", ";
+							}
+					else
+						div.innerHTML += theObj.showtimes[j] + "<br>" ;
+					}
+				}										//end of Top Gun case
+				
+				else	{						//if the movie is NOT Top Gun you don't need to change rating so just display
+			
+				div.innerHTML += "The movie named: " + theObj.title + " was created in: " + theObj.year + "<br>";
+				div.innerHTML += "and its rating is: " + theObj.rating + "<br>";
+				div.innerHTML += "The show times today are:" + "<br>";
+					for (j = 0; j < theObj.showtimes.length; j++) {
+						if (j < theObj.showtimes.length -1) 	{
+							div.innerHTML += theObj.showtimes[j] + ", ";
+							}
+					else
+						div.innerHTML += theObj.showtimes[j] + "<br>" ;
+					}
+		 		}
+		}
+	}
+ </script>
+</head>
+<body>
+
+<div id="movies">
+ </div> 
+</body>
+</html>

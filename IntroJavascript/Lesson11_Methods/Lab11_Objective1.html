@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title> Lab 11 Objective 1 </title>
+  <meta charset="utf-8">
+  <script>
+  /* 
+  
+Add a method named updateRating() to the Movie object you created in the previous lab. This method should take one parameter and update the rating property of the movie object. Test your method by writing code to display a movie object's name and rating in the web page, in the "movies" <div>.
+
+Include comments in the code explaining what you're doing and why.
+
+Submit your file once you have it working.
+  
+  */
+   window.onload = init;
+
+ function Movie(title, year, genre, rating, showtimes) {	//object constuctor for the Movie object
+  this.title = title;
+  this.year = year;
+  this.genre = genre;
+  this.rating = rating;
+  this.showtimes = showtimes;
+ 
+  this.updateRating = function(myRating) {					// method to update movie rating with parameter
+	  theRating = myRating;
+	  return theRating;
+	}
+ }
+
+    function init() {
+      														
+	  var pulpfiction = new Movie("Pulp Fiction", "1995", "Drama", 5,["1:00 pm", "3:00 pm", "5:00 pm"]);
+      var topgun = new Movie("Top Gun", "1996", "Action", 3,["2:00 pm", "4:00 pm", "6:00 pm"]);
+	  var huckfin = new Movie("Huck Fin", "2006", "Children", 3,["2:00 pm", "4:00 pm", "6:00 pm"]);
+
+       var div = document.getElementById("movies");
+	
+		var anArray = [pulpfiction, topgun, huckfin];  	// put the three movie objects into an array 
+		 for (var i = 0; i < anArray.length; i++) {		// iterate thru each object,display the movies and their elements
+			var theObj = anArray[i];
+			div.innerHTML += "The movie named: " + theObj.title + " was created in: " + theObj.year + "<br>";
+			div.innerHTML += "and its original rating was: " + theObj.rating + "<br>";
+														//update the rating of each object with the method
+			div.innerHTML += "and its new rating is: " + theObj.updateRating (1) + "<br>";
+			
+			/* div.innerHTML += "and its new rating is: " 
+			
+			if (i = 1) {
+				+ theObj.updateRating (1) + "<br>";
+			}
+			else {
+				+ theObj.rating + "<br>";
+			}
+			
+			*/ 
+			div.innerHTML += "The show times today are:" + "<br>";
+			for (j = 0; j < theObj.showtimes.length; j++) {
+				if (j < theObj.showtimes.length -1) 	{
+					div.innerHTML += theObj.showtimes[j] + ", ";
+				}
+				else
+					div.innerHTML += theObj.showtimes[j] + "<br>" ;
+			}
+		 }
+	 }
+   
+ </script>
+</head>
+<body>
+ <div id="movies">
+ </div> 
+</body>
+</html>

@@ -1,0 +1,42 @@
+Question 1:
+To get the value of a text input or a textarea form control, what property of the form control element do you use?
+
+var descriptionTextarea = document.getElementById("description");		
+var description = descriptionTextarea.value;
+      
+Question 2:
+What array do you use to get the value of a select form control?
+
+var genreSelect = document.getElementById("genre");					//stores entire <select> element
+var genreOption = genreSelect.options[genreSelect.selectedIndex];	// use selectedIndex property of <select> element to determine option (arrray element) selected
+var genre = genreOption.value; 										// Store the value of array element in genre
+
+Question 3:
+If the user types a number into a text input or a textarea form control and you want to use that value as a number (say, to add to or subtract from another number), how would you convert the string from the form control to a number?
+
+  var textInput = document.getElementById("theText"); // get text from DOM
+  var myText = textInput.value;
+  var myNumber = parseInt(mytext.value);	// get value from element, convert to number
+
+
+Question 4:
+In the movie example from the lesson, suppose you want to perform certain actions if a user entered a comedy and gave it the highest rating (5). What would you use for the if statement?
+
+ if (title == null || title == "") {		// make sure title not empty
+        alert("Please enter a movie title");
+        return;
+      }
+	  
+	  if (genre == "comedy" && rating ==5)	{	// take an action if genre is comedy and rating is 5
+		  alert("wow, whats up with the great rating?");
+	  }
+      else {									
+        var movie = new Movie(title, rating, genre, description);	// create movie object using movie constructor
+        movieList.push(movie);					// put the movie object into the movieList array
+        var movies = document.getElementById("movies");
+        movies.innerHTML = "Added " + movie.title + " to the list.";
+      
+	  	 var theForm = document.getElementById("theForm");	// clear the form values before submitting next list object
+        theForm.reset();
+	  }
+

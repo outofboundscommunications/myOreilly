@@ -1,0 +1,74 @@
+<!--
+Objective 1:
+The position.coords object that you use to access the latitude and longitude in your success 
+callback handler function has another property, accuracy, that provides an estimate of the accuracy 
+of the location reported by Geolocation, in meters.
+
+Update the code below to add accuracy to your alert when you display the location retrieved using Geolocation:
+
+window.onload = init;
+          
+function init() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getMyLocation, locationError);
+    }
+    else {
+        console.log("Sorry, no Geolocation support!");
+    }
+}
+function getMyLocation(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    alert("My position is: " + latitude + ", " + longitude);
+}      
+function locationError(error) {
+    var errorTypes = {
+        0: "Unknown error",
+        1: "Permission denied by user",
+        2: "Position not available",
+        3: "Request timed out"
+    };
+    var errorMessage = errorTypes[error.code];
+    if (error.code == 0 || error.code == 2) {
+        errorMessage += " " + error.message;
+    }
+    console.log(errorMessage);
+    alert(errorMessage);
+}    
+
+
+
+-->
+
+
+<!doctype html>
+<html>
+<head>
+<title>Lesson 13 - Geolocation- My Random Thoughts</title>
+<meta charset="utf-8">
+<script src="Ls13Obj1.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	}
+form {
+	margin-bottom: 20px;
+}
+div#map {
+	width: 400px;
+	height: 400px;
+}
+</style>
+</head>
+<body>
+<h1>Get Your Location Now</h1>
+<form>
+	<label>Click submit button to get your location</label>
+	<input type="button" id="submit" value="Submit">
+</form>
+<h2> Where You Are Right Now </h2>
+<div id="myMap"></div>
+<div id="map"></div>
+</body>
+</html>

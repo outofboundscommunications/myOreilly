@@ -1,0 +1,51 @@
+<!-- Objective 1:
+Look at the Modernizr documentation. Pick another feature you'd like to test for using Modernizr, and update the code from the lesson to check for that feature. You can pick a JavaScript feature, an HTML element, or a CSS property (or more than one!).
+-->
+<!doctype html>
+<html>
+<head>
+<title>chapter 14 - Homework 0bjective 1 -JavaScript Libraries and Feature Detection</title>
+<meta charset="utf-8">
+<script src="../../Modernizr.js"></script>
+
+
+<script type="text/javascript">
+//testing for both geolocation and local storage
+	Modernizr.load([
+		"features.js",
+	{
+		test: Modernizr.geolocation,
+		yep : "geolocation.js",
+		nope: "noGeolocation.js"
+	},
+	{
+		test:Modernizr.multiplebgs,
+		yep: "multiplebgs.js",
+		nope:"noMultiplebgs.js"
+	},
+	{
+		test: Modernizr.localstorage,
+		yep : "localStorage.js",
+		nope: "noLocalStorage.js",
+		complete: function() {
+			init();
+		}
+	}
+	
+]);
+</script>
+
+<link href="background.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div id="nice">
+    <ul id="features">
+	</ul>
+</div>
+    
+    
+
+</body>
+
+</html>

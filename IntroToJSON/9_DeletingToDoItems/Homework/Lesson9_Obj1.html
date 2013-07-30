@@ -1,0 +1,56 @@
+<!--
+Objective 1:
+Implement the "done" feature in the To-Do List application. The CSS is already in the file todo.css (you added it in a previous lesson), and you need to make use of these classes "done" and "notDone" when you implement the done/not done button functionality.
+
+Here's what you'll need to do:
+
+When you create the done/not done button in the createNewTodo function, you'll need to add a click handler to the done/not done button to handle the update of the button (just like we did for delete). Name this click handler updateDone().
+Implement updateDone() so that if the to-do item is not done, the button changes to done, and vice versa. You'll need to update the to-do item in three places:
+The web page
+Local Storage
+The todos array
+Make sure you test your code by marking items as done and then not done again a few times. Reload the page and make sure that the state of your to-do items is correct when the page first loads.
+-->
+
+<!doctype html>
+<html>
+<head>
+<title>To-Do List</title>
+	<meta charset="utf-8">
+	<script src="todo.js"></script>
+	<style>
+		body {
+			font-family: Helvetica, Arial, sans-serif;
+		}
+	</style>
+<link rel="stylesheet" href="todo.css">
+</head>
+<body>
+    <h1>My To-Do List</h1>
+    <ul id="todoList">
+    </ul>
+    <form>
+    <fieldset>
+        <legend>Add a new to-do item</legend>
+        <div class="tableContainer">
+        <div class="tableRow">
+    		<label for="task">Task: </label>
+    			<input type="text" id="task" size="35" placeholder="get milk">
+    	</div>
+    <div class="tableRow">
+    	<label for="who">Who should do it: </label>
+    		<input type="text" id="who" placeholder="Scott">
+    </div>
+    <div class="tableRow">
+    	<label for="dueDate">Due Date: </label>
+    		<input type="date" id="dueDate">
+    </div>
+    <div class="tableRow">
+    	<label for="submit"></label>
+    	<input type="button" id="submit" value="submit">
+    </div>
+    </div>
+   </fieldset>
+   </form>
+</body>
+</html>

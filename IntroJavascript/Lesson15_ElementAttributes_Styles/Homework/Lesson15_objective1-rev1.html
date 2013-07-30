@@ -1,0 +1,61 @@
+<!--Finish the JavaScript program below to add the "red" class to the "basic" <div> element. Make sure you add the "red" class rather than replace the existing "basic" class.
+
+The existing code sets up a click handler function for the "basic" <div> element so when the user clicks on it, the function addRed() is called. It's your job to finish this function.
+
+Notice that we use document.querySelector() to return a single element that matches the selector. In this case, we select using the existing class of the div, "basic."
+
+Remember that when an element has multiple classes, you need to leave a space between the class names. So the end result will be as if you'd typed this into the HTML:
+
+<div class="basic red"> 
+</div>
+
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+ <title> Quiz </title>
+ <meta charset="utf-8">
+ <style>
+ .basic {
+  font-family: Helvetica, Verdana, sans-serif;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+ }
+ .red {
+  background-color: red;
+  border: 2px dotted black;
+ }
+ </style>
+ <script>
+ window.onload = init;
+ 
+ function init() {
+  var myDiv = document.getElementById("myDiv");		//fetch the div with the "myDiv" ID
+  myDiv.onclick = addRed;							//set up click event that calls the addRed() function
+ }
+ 
+ function addRed() {								
+		showHide(myDiv);							
+    }
+
+ function showHide(el)	{
+	 var divClass = el.getAttribute("class");	//get the value of the class attribute using the getAttribute() method
+	 if (divClass == "basic")	{
+		 el.setAttribute('class', 'basic red');
+	 }
+	 else	{
+		 el.setAttribute('class', 'basic');
+	 }
+ }
+ </script>
+</head>
+<body>
+ <div id="myDiv" class="basic">
+  Click to make me red!
+ </div>  
+</body>
+</html>
+ 

@@ -1,0 +1,68 @@
+<!--
+Update the code you just wrote for Objective 1 to use the style property instead of by adding a class to change the look of the "basic" <div>. In this version, pick your own background-color, border-width, border-style, and border-color values to use.
+
+The existing code sets up a click handler function for the "basic" <div> element so when the user clicks on it, the changeStyle() function is called. It's your job to finish this function.
+
+Remember to use the JavaScript equivalents for the CSS properties to set these properties using the style property with JavaScript. For instance, the CSS background-color property is equivalent to the JavaScript style.backgroundColor property.
+
+In the example below, remove the red code and add code in the blue areas to complete the project.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+ <title> Quiz </title>
+ <meta charset="utf-8">
+ <style>
+ .basic {
+  font-family: Helvetica, Verdana, sans-serif;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+ }
+ 
+
+ </style>
+ <script>
+ 
+ var onOff = 0;				//global variable that we set on or off to switch styling of <div>
+ 
+ window.onload = init;
+ 
+ function init() {
+  var myDiv = document.getElementById("myDiv");		//fetch the div with the "myDiv" ID					
+  myDiv.onclick = changeStyle;		//call the changeStyle() function, pass in state of styling (on or off)
+ }
+ 
+  function changeStyle() {
+    // your code here to change the background color,
+    // border width, border style, and border color properties.
+	
+	if (onOff == 0) {
+		myDiv.style.backgroundColor = "red";
+		myDiv.style.borderWidth = "5px";
+		myDiv.style.borderStyle = "solid";
+		myDiv.style.borderColor = "blue";
+		onOff = 1;
+	}
+	
+	else	{
+		myDiv.style.backgroundColor = "";
+		myDiv.style.borderWidth = "";
+		myDiv.style.borderStyle = "";
+		myDiv.style.borderColor = "";
+		onOff = 0;
+  }
+  
+ }
+ 
+ </script>
+</head>
+<body>
+ <div id="myDiv" class="basic">
+  Click to make me red!
+ </div>  
+</body>
+</html>
+ 

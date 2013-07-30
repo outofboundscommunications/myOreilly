@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+
+<!--Lesson 3 - Objective 1:
+1. Create a new file named todoList.json with the following data:
+
+[{"task":"Get milk","who":"Scott","dueDate":"today","done":false},
+ {"task":"Get broccoli","who":"Elisabeth","dueDate":"today","done":false}]
+
+2. Create an HTML page named todoList.html that contains a <div> element with the id todoList, and a <div> element with the id status.
+
+3. Create a JavaScript file named todoList.js that uses Ajax to retrieve the to-do list items from the file todoList.json and display the JSON results in the todoList.html page (like we did with the pets example from the lesson) in the todoList <div>. 
+
+4. Your program should also display the status response in the status <div>. If you get an error loading the data, display an error message in the status <div>.
+
+5. Comment your code to explain what you're doing and why. Submit your todoList.html, todoList.js, and todoList.json files when you have the project working to your satisfaction.-->
+
+<title>IntroToJSON - Lesson 3|Objective 1</title>
+<meta charset="utf-8">
+<script src="todoList.js"></script>
+<style>
+body {
+font-family: Helvetica, Arial, sans-serif;
+}
+legend {
+font-weight: bold;
+}
+</style>
+</head>
+<body>
+<div>
+<fieldset>
+<legend>The ToDo List</legend>
+<ul id='todoList'></ul>
+<div id="status"></div>
+</fieldset>
+</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <title>Mad Lib</title>
+ <meta charset="utf-8">
+ <script>
+  window.onload = init;
+     
+  function init() {
+   /* Write two lines of code here to get the 
+    * submit button, and assign the onclick property
+    * to a function named goMad.
+    */
+ 	
+	var button = document.getElementById("submit");  // fetch the submit button from DOM, assign to var button
+      button.onclick = goMad;   // assign the function goMad to the onclick property of the submit button
+  }
+  
+  /*
+   * Complete the goMad() function so it gets all the input elements
+   * that contain words you need to complete the madlib puzzle.
+   * You can use either of the two methods we used in the lesson:
+   * document.getElementById() or document.getElementsByTagName()
+   * or a combination.
+   * Once you've retrieved all the words, use the "story" string
+   * variable to update the &lt;div> element in the page
+   * with the words.
+   */
+ function goMad() {
+
+   var words =[];             // declare the words variable and initialize to null
+   var inputs = document.getElementsByTagName("input");  // fetch all the input form elements from DOM and store in variable inputs
+   for (var i = 0; i < inputs.length - 1; i++) {   // loop thru the form elements one by one, store into words variable
+	   var addendString = inputs[i].value;
+	   //words += addendString;
+	   words +=addendString;
+   }
+var story = words[0] + "! he said " + words[1] + " as he jumped into his convertible " + words[2] + " and drove off with his " + words[3] + " wife.";
+
+var div = document.getElementById('story');  // fetch the div from DOM and assign to variable div
+div.innerHTML = story;  // write the story variable into the html within the div
+}
+     
+ </script>
+</head>
+<body>
+<form>
+<label for="exclamation">Exclamation:</label>
+<input id="exclamation" type="text" size="20"> <br>
+<label for="adverb">Adverb:</label>
+<input id="adverb" type="text" size="20"><br>
+<label for="noun">Noun:</label>
+<input id="noun" type="text" size="20"><br>
+<label for="adjective">Adjective:</label>
+<input id="adjective" type="text" size="20"><br>
+<input type="button" id="submit" value="Go Mad!">
+</form>
+
+<div id="story">
+</div>
+
+</body>
+</html>

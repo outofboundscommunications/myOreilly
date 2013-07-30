@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title> Object Constructors </title>
+  <meta charset="utf-8">
+  <script>
+  /* 
+  
+  Objective 1:
+Write a program that creates an array of Movie objects, and then displays the movie information in a web page. Your movie object should contain at least the following properties:
+
+title (a string)
+year (a number)
+genre (a string)
+rating (a number between 1 and 5)
+showtimes (an array of strings, like ["3:00pm", "5:00pm"])
+Create at least three movie objects in your array. You can pick whichever movies you like (use Wikipedia or IMDB if you need help with movie ideas!). Then, loop through all the movies in the array and display at least the movie title, year, and showtimes in the "movies" <div>.
+  
+  */
+   window.onload = init;
+
+   function Movie(title, year, genre, rating, showtimes) {
+      this.title = title; //string
+      this.year = year; // number
+      this.genre = genre; //string
+      this.rating = rating; //number between 1 and 5
+	  this.showtimes =showtimes;  // array of strings like 3:00 pm and 5:00 pm
+    }
+          
+    function init() {
+      
+	  var pulpfiction = new Movie("Pulp Fiction", "1995", "Drama", 5,["1:00 pm", "3:00 pm", "5:00 pm"]);
+      var topgun = new Movie("Top Gun", "1996", "Action", 3,["2:00 pm", "4:00 pm", "6:00 pm"]);
+	  var huckfin = new Movie("Huck Fin", "2006", "Children", 3,["2:00 pm", "4:00 pm", "6:00 pm"]);
+
+       var div = document.getElementById("movies");
+	
+		var anArray = [pulpfiction, topgun, huckfin];  	// put the three movie objects into an array 
+		 for (var i = 0; i < anArray.length; i++) {		// iterate thru each object to display the movies and their elements
+			var theObj = anArray[i];
+			div.innerHTML += "The movie named: " + theObj.title + " was created in: " + theObj.year + "<br>";
+			div.innerHTML += "The show times today are:" + "<br>";
+			for (j = 0; j < theObj.showtimes.length; j++) {
+				if (j < theObj.showtimes.length -1) 	{
+					div.innerHTML += theObj.showtimes[j] + ", ";
+				}
+				else
+					div.innerHTML += theObj.showtimes[j] + "<br>" ;
+			}
+		 }
+	 }
+  	
+
+  </script>
+</head>
+<body>
+ <div id="movies">
+ </div> 
+</body>
+</html> 

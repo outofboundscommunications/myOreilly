@@ -1,0 +1,58 @@
+<!--
+Objective 1:
+Create a JavaScript program for the HTML below in the file zero.js. The JavaScript should include the following features:
+
+A click handler for handling the submit button.
+When the user clicks the button, compute the result of the expression.
+If any of the inputs are empty, alert the user with a message.
+If either of the operands is not a valid integer (use isNaN() to determine this), throw an error.
+If the user tries to divide by zero, throw an error.
+Use try/catch to manage the errors.
+In general, you don't want to use try/catch to catch user interface errors, but it's a useful technique to catch errors that would generate a value that would cause your program to fail in a way that would be confusing to the user (for instance, if you try to divide by 0, or you try to operate on non-integer operands).
+
+When your project is working to your satisfaction, hand in your html and js (zero.js) files, with comments explaining what you are doing and why. Your program should handle the following cases:
+
+10 / 5
+10 / 0
+10 ? 5
+2 + 3
+12 - 2
+5 * 2
+test / 0
+
+-->
+<!doctype html>
+<html>
+<head>
+    <title>Exceptions</title>
+    <meta charset="utf-8">
+    <script src="zero.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        font-size: 1.2em;
+      }
+      h2 {
+        font-size: 1.1em;
+      }    
+    </style>
+</head>
+
+<body>
+
+<form>
+<h1>Enter an arithmetic expression with one operator and two Integer operands
+to compute:</h1>
+<input type="text" id="operand1" placeholder="10" size="3">
+<input type="text" id="operator" placeholder="/" size="1">
+<input type="text" id="operand2" placeholder="5" size="3"><br>
+<input type="button" id="submit" value="Compute"><br>
+</form>
+
+<h2>Result:</h2>
+<p id="result"></p>
+
+</body>
+</html>

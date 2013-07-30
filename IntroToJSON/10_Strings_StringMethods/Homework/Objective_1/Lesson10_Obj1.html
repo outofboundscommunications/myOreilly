@@ -1,0 +1,74 @@
+<!--
+Objective 1:
+In the lesson, you learned how to manipulate and search for strings. For this project, add the capability to search for to-do items to the To-Do List Application. Your application should:
+
+1. Display a search input text box (one line) with "Search" button.
+2. Allow the user to search for a string that will match in either the "who" or "task" field. That is, if I have an item, "Scott needs to get milk by ..." then this item should match a search on "Scott" and a search on "milk."
+3.Display the results of the search in a list (make sure the list displays new results each time!).
+4.If there are no matches, display a message to the user indicating there are no results.
+5.You can use the search technique from the lesson that you think will work best for this project. 
+6.Update your HTML to add the new fields (and the CSS to style them if you like, but that's not required), and the JavaScript to implement the search.
+
+Comment your code to explain the additions and changes you make.
+-->
+
+<!doctype html>
+<html>
+<head>
+<title>To-Do List</title>
+	<meta charset="utf-8">
+	<script src="todoV3.js"></script>
+	<style>
+		body {
+			font-family: Helvetica, Arial, sans-serif;
+		}
+	</style>
+<link rel="stylesheet" href="todo.css">
+</head>
+<body>
+    <h1>My To-Do List</h1>
+    <ul id="todoList">
+    </ul>
+    <form>
+    <fieldset>
+        <legend>Add a new to-do item</legend>
+        <div class="tableContainer">
+        <div class="tableRow">
+    		<label for="task">Task: </label>
+    			<input type="text" id="task" size="35" placeholder="get milk">
+    	</div>
+    <div class="tableRow">
+    	<label for="who">Who should do it: </label>
+    		<input type="text" id="who" placeholder="Scott">
+    </div>
+    <div class="tableRow">
+    	<label for="dueDate">Due Date: </label>
+    		<input type="date" id="dueDate">
+    </div>
+    <div class="tableRow">
+    	<label for="submit"></label>
+    	<input type="button" id="submit" value="submit">
+    </div>
+    </div>
+   </fieldset>
+   </form>
+   <form id="mySearchForm">
+   <fieldset>
+        <legend>Search to do items</legend>
+        <div class="tableContainer">
+        <div class="tableRow">
+    		<label for="task">Search: </label>
+    			<input type="text" id="searchString" size="35" placeholder="enter your query here">
+    	</div>
+        <div class="tableRow">
+            <label for="submit"></label>
+            <input type="button" id="search" value="search">
+        </div>
+        <div class="tableRow">
+             <ul id="mySearchResults"></ul>
+        </div>
+    </div>
+   </fieldset>
+   </form>
+</body>
+</html>

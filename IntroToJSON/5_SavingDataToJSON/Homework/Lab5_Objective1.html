@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<!--
+
+Objective 1:
+
+In our To-Do List application, we use XMLHttpRequest in two functions for two different purposes: We first use it in the function getTodoData() to load existing to-do items from the files todo.json when the application first runs (when the user loads the todo.html web page). We then use it in the function saveTodoData() to send a request containing all the to-do items in the URL so that the save.php script can save the items in the file todo.json.
+
+Even though we don't expect data back from the server when we send the request to save the data, the server does send back a response; just like when we send the request to retrieve the data, the response contains information about the readyState of the request, as well as the status of the request.
+
+Three common status responses from web servers include:
+
+200: Everything is okay
+500: Server error
+404: Page (or script) not found
+
+(1) Modify the saveTodoData() so that the function can receive information from the server about the readyState and test for each of these status values, and displays a message with the status either in the web page or in the console.
+
+(2) Once you've implemented the updated version of the function, try adding a new to-do item. What message do you see?
+
+(3) Now, temporarily rename the save.php script. Now try to add a new to-do item. What message do you see now?
+
+(4) Change the name of your PHP script back to save.php and verify that it's working correctly by adding a few new to-do items to your list. Reload the page a few times to make sure they are getting saved correctly.
+
+When your project is working to your satisfaction, hand in your html, js, json, and php files.
+
+-->
+
+<title>IntroToJSON | Lab 5 | Objective 1</title>
+<meta charset="utf-8">
+<script src="todoList.js"></script>
+
+<link rel="stylesheet" href="todo.css">
+</head>
+<body>
+<h1>My To-Do List</h1>
+<ul id="todoList">
+</ul>
+<form>
+<fieldset>
+<legend>Add a new to-do item</legend>
+<div class="tableContainer">
+<div class="tableRow">
+<label for="task">Task: </label>
+<input type="text" id="task" size="35" placeholder="get milk">
+</div>
+<div class="tableRow">
+<label for="who">Who should do it: </label>
+<input type="text" id="who" placeholder="Scott">
+</div>
+<div class="tableRow">
+<label for="dueDate">Due Date: </label>
+<input type="date" id="dueDate">
+</div>
+<div class="tableRow">
+<label for="submit"></label>
+<input type="button" id="submit" value="submit">
+</div>
+</fieldset>
+<h3 id="status">Status of the JSON request: </h3>
+</form>
+</body>
+</html>

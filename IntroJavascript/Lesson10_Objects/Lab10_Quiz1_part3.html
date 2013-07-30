@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title> Object Constructors </title>
+  <meta charset="utf-8">
+  <script>
+  /* 
+  
+ Given this object constructor function:
+
+function House(stories, bedrooms, bathrooms, squareFeet) { 
+ this.stories = stories; 
+ this.bedrooms = bedrooms; 
+ this.bathrooms = bathrooms; 
+ this.squareFeet = squareFeet; 
+}
+  
+
+Show the code to create a House object representing a 3-bedroom, 2-bathroom, 2-story house, with 1100 square feet, and put it in the variable, myHous
+  
+  */
+   	window.onload = init;
+
+	function House(stories, bedrooms, bathrooms, squareFeet) { 
+	 this.stories = stories; 
+	 this.bedrooms = bedrooms; 
+	 this.bathrooms = bathrooms; 
+	 this.squareFeet = squareFeet; 
+	}
+          
+    function init() {
+      
+		var myHouse = new House("2 story", "3-bedroom", "2-bathroom", "1100 square feet");
+        var div = document.getElementById("Houses");
+		div.innerHTML += "The new house parameters are: " + myHouse.stories + " " + myHouse.bedrooms + " " + myHouse.bathrooms + myHouse.squareFeet;
+		 }
+  	
+
+  </script>
+</head>
+<body>
+ <div id="Houses">
+ </div> 
+</body>
+</html> 

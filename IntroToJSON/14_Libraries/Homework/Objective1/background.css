@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document for Lesson 14 Objective 1 homework - demonstrating using css3 with modernizr */
+
+
+#nice {
+    background: url(background-one.jpg) top left repeat-x;
+	width:500px;
+}
+/* now we add the modernizr enhancement for this #nice div */
+.multiplebgs #nice {
+    background: url(background-one.jpg) top left repeat-x,
+url(background-two.jpg) bottom left repeat-x;
+}
+
+

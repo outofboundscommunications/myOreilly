@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--Objective 1:
+In the lesson, you learned that the localStorage object uses an associative array to store items. An associative array is similar to a regular array but uses keys instead of numerical indices to keep track of the values. With a regular array, you access an item using its index, like this:
+value = myArray[i];
+
+where i is a number less than the length of the array.
+
+With an associative array, you can access an item using its key, like this:
+
+value = myAssocArray[key];        
+      
+using the key just like you would an index, with the [ ] notation. You can use this notation with the localStorage object to access values associated with a key instead of the getItem() method. They both do the same thing.
+
+Rewrite the showAllPrefs() function from the lesson to use the [ ] notation to access the value associated with a key in localStorage. Test it with your prefs application to make sure it works.
+
+Here is the existing version of showAllPrefs():
+
+function showAllPrefs() {
+    for (var i = 0; i < localStorage.length; i++) {
+        key = localStorage.key(i);
+        value = localStorage.getItem(key);
+        addToList(key, value);
+    }  
+When your project is working to your satisfaction, hand in your html and js files.-->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Lesson 7 - Objective 1</title>
+  <script src="prefs.js"></script>
+</head>
+<body>
+   <h1>Preferences</h1>
+   <ul id="items">
+   </ul>  
+
+</body>
+</html>

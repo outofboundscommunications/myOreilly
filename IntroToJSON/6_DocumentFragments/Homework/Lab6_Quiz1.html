@@ -1,0 +1,27 @@
+<!--Question 1:
+How can using a document fragment improve your code?
+
+Document fragments make your code faster by allowing you to update the DOM in one execution rather than updating the DOM each time you have a change. You can add many elements to a document fragment and then we you are done, you add the document fragment to the actual DOM. Much more efficient.  The fragment is literally virtual, not really a DOM node.
+
+DocumentFragments allow developers to place child elements onto an arbitrary node-like parent, allowing for node-like interactions without a true root node.  Doing so allows developers to produce structure without doing so within the visible DOM -- an increase of speed is the true advantage. (reference: http://davidwalsh.name/documentfragment).
+
+Question 2:
+Why do you think it's important that the document fragment itself is not added to the DOM, but rather only the elements contained within the fragment?
+
+By only adding the daughter elements, that allows you to have a 'blank slate' document fragment ready again for your next iteration of adding elements. you can use the same document fragment container over and over again.
+
+
+Question 3:
+If you want an element to be visible in the page immediately after creating it, should you add it to the DOM or add it to a document fragment?
+
+I would guess it depends on how many elements you are adding to the fragment before you add the fragment to the DOM. I think you could add it to the body or frameset in an onload event as well.
+
+Question 4:
+How do you know when an element has been added to the DOM?
+
+when a user can see that element on the page visually. You could also view the DOM structure and search for that element.
+
+-->
+
+
+

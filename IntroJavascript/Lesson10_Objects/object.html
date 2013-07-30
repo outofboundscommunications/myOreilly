@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title> Objects </title>
+  <meta charset="utf-8">
+  <script>
+    window.onload = init;
+                
+    function init() {
+     
+	  var tilla = {
+        type: "dog",
+        name: "Tilla",
+        weight: 26,
+        likes: ["playing ball", "going for walks", "eating anything"]
+      };
+                
+      var pickles = {
+        type: "cat",
+        name: "Pickles",
+        weight: 7,
+        likes: ["sleeping", "eating butter"]
+      };
+                
+      var div = document.getElementById("pets");
+
+      var anArray = [tilla,pickles];
+	  for (var i=0; i<anArray.length; i++) {
+		  var theObj = anArray[i];
+		  div.innerHTML += "the array named: " + theObj.name + " likes: ";
+		  for (j=0; j < theObj.likes.length; j++) {
+			div.innerHTML += theObj.likes[j];
+				if (j < theObj.likes.length -1) {
+					div.innerHTML += " ";
+				}
+				else	{
+					div.innerHTML += "<br>";
+		  }
+	  	  }
+		}
+	
+	}
+	
+  </script>
+</head>
+<body>
+  <div id="pets">
+  </div>       
+</body>
+</html>

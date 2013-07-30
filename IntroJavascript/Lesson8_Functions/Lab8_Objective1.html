@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <title>Functions - Lab 8 Objective 1 </title>
+ <meta charset="utf-8">
+ <script>
+ 
+ window.onload = init;
+
+ function init() {
+  // set up a button click handler
+  // when the button is clicked, we want to call pythagoras()
+  	var button = document.getElementById("submit");
+    button.onclick = pythagoras; // pythagoras is the click handler for the button
+ }
+
+ // Computes the length of side c of a triangle, given
+ // the lengths of side a and b, using the Pythagorean Theorem
+ function pythagoras() {
+  // your code here to get the values of sides and b
+  // remember to convert a and b to numbers (using parseFloat)
+	var SideAInput = document.getElementById("a");
+	if (SideAInput == null || "")  {
+		alert("Please enter a value for side a!");
+	}
+	else	{
+		
+		var SideA = SideAInput.value;
+	}
+	
+	var SideBInput = document.getElementById("b");
+	if (SideBInput == null || "")	{
+		alert("Please enter a value for side b!");
+	}
+	else	{
+		
+		var SideB = SideBInput.value;
+	}
+	
+		
+	var a = parseFloat(SideA);
+	var b = parseFloat(SideB);
+			
+  // your code here to compute the value of side c
+  
+	function square(x) {
+		mysquare = x*x;
+		return mysquare;
+		
+	}
+	
+	function squareroot(x) {
+		mysquareroot = Math.sqrt(x);
+		return mysquareroot;
+	}
+	
+	var c_squared = square(a) + square(b); // calculate square of side c
+	var c = squareroot(c_squared);         //take square root to get side c
+	
+  // your code here to call the function displayResult
+  
+  	displayResult(a,b,c);
+
+ }
+
+
+ function displayResult(a, b, c) {
+  var div = document.getElementById("result");
+  div.innerHTML = "Triangle: a = " + a + ", b = " + b + ", c = " + c;
+ }
+ </script>
+</head>
+<body>
+ <form>
+ <label for="a">Enter lengths for sides a: </label>
+ <input type="number" id="a" size="3">
+ <label for="b"> and b: </label>
+ <input type="number" id="b" size="3"> <br>
+ <input type="button" id="submit" value="Compute c!">
+ </form>
+ <div id="result">
+ </div>  
+</body>
+</html>

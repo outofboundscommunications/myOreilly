@@ -1,0 +1,52 @@
+<!--Question 1:
+We said it's a good idea to use a key that is specific to the application in which you're using that key/value Local Storage item, so that your application knows which items it should use.
+
+Can you think of another good reason to use keys that are specific to the application in which they are used?
+
+So you dont have any conflicts with other applications who could possibly be using the same key/value pair.
+
+Question 2:
+If you create and use another application at the same domain (userworld.com) that runs the following line of code, what will happen to your to-do list items in Local Storage?
+
+localStorage.clear();
+
+It deletes the data in local storage!
+
+Question 3:
+In the lesson, we displayed a console message if the user's browser doesn't support local storage. What's a better option for handling this case?
+
+1. You could create logic that stores the values in a cookie (up to 4kb)
+2. i also noticed some sort of websql you could use?
+
+Question 4:
+The browser developer tool Firebug Lite uses Local Storage to store preferences. Here is an example of one of the items it stores in Local Storage:
+
+{"options":{
+   "saveCookies":true,
+   "saveWindowPosition":false,
+   "saveCommandLineHistory":false,
+   "startOpened":true,
+   "startInNewWindow":false,
+   "showIconWhenHidden":true,
+   "overrideConsole":true,
+   "ignoreFirebugElements":true,
+   "disableWhenFirebugActive":true,
+   "disableXHRListener":false,
+   "disableResourceFetching":false,
+   "enableTrace":false,
+   "enablePersistent":false},
+ "persistedState":{
+   "isOpen":true,
+   "height":200,
+   "sidePanelWidth":350,
+   "selectedPanelName":"DOM",
+   "selectedHTMLElementId":"8",
+   "htmlSelectionStack":[],
+   "commandHistory":[],
+   "commandPointer":-1}
+ }
+Describe in your own words what kind of value this is.
+
+these are persistent settings for the configuration/options for using the firebug lite plug in. that way your settings are already configured for next time you open the plug in.
+
+-->

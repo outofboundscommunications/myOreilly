@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <title>Local Storage Project</title>
+    <meta charset="utf-8">
+    <script src="mylocalStorageProject.js"></script>
+</head>
+<!--Create an simple application that uses a form to accept five colors and stores those colors in Local Storage. Just like the To-Do List application, your colors program should display the colors you add to Local Storage in a list, and if you reload the page, you should see the colors you've already added in the list, before you add more.
+
+Things to keep in mind as you implement this project:
+Pick a good key to store your colors.
+Make sure your colors program knows which items in Local Storage are okay to use (using the appropriate key).
+When the user clicks the "submit" button, you'll store all the colors entered in the form.
+If the user enters more colors after you've reloaded the page, don't overwrite the existing colors in the list.
+If the user leaves some of the form inputs empty, make sure your program handles that correctly.
+You can use just simple list items to display the colors (no need to get fancy with the HTML).
+You can use an array to store the colors if you want, but you don't have to.
+The colors you add can be simple string values, so no need to use JSON to stringify and parse the values you store.
+-->
+<body>
+  <div>
+    <h1>Colors</h1>
+    <ul id="colors">
+    </ul>
+    <form id='theForm'>
+      <input type="text" size="10" id="color1" placeholder="blue"><br>
+      <input type="text" size="10" id="color2" placeholder="blue"><br>
+      <input type="text" size="10" id="color3" placeholder="blue"><br>
+      <input type="text" size="10" id="color4" placeholder="blue"><br>
+      <input type="text" size="10" id="color5" placeholder="blue"><br>
+      <input type="button" id="submit" value="submit">
+    </form>
+  </div>
+</body>
+</html> 

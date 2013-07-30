@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Intro to JSON | Lesson 4 - Objective 1</title>
+<script src="twitter.js"></script>
+</head>
+
+<!--Objective 1:
+Twitter has a JSON Application Programming Interface (API), which means that developers who are writing Twitter-based apps can use JSON information from Twitter as input to their programs.
+
+Unfortunately, you must be authenticated as a Twitter user (through their API) to access the Twitter data. However, we've captured some of the JSON data that is output by Twitter, which you can see in this file: twitterJSON.txt.
+
+Notice first that there is a lot of data; this is typical for a web service. Also notice that the Twitter data is similar to our todo.json data; it's an array of tweets. Each tweet object, once parsed from JSON into a JavaScript object, will have lots of properties, and even a property that contains another object—the user property.
+
+For this project, your job is to write a program (both the HTML and the JavaScript) to load the Twitter data using Ajax and update your web page with the name of the Twitter user who made the tweet, and text of the tweet. The text is one of the many properties in the JSON that you can see in the Twitter data. Here are the steps you'll need to do to make this work:
+
+1. Save the Twitter data, either from the URL above, or just by copying the data in the twitterJSON.txt file, and save it in a file named twitter.json. You can make a new folder under your /javascript2 folder for this project if you want, just make sure that all the files you create are in the same folder.
+2.Create an HTML file named twitter.html, where you'll display the tweets.
+3.Write a JavaScript program in a file named twitter.js, similar to the one you just wrote for the To Do List application, that reads in the data in the twitter.json file, parses the tweets (even if it's just one!) and displays the name property of the Twitter user (O'Reilly School) and the text property of the tweet in the web page, so it looks like this:
+4. Comment your code to explain what you're doing and why. Submit your html, js, and json files when you have it working to your satiisfaction.
+-->
+<body>
+<div>
+<fieldset>
+<legend>Twitter Data</legend>
+<ul id='userList'></ul>
+
+</fieldset>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<title>JavaScript Libraries and Feature Detection</title>
+<meta charset="utf-8">
+<script src="Modernizr.js"></script>
+<script>
+	
+	//testing for both geolocation and local storage
+	Modernizr.load([
+		"features.js",
+	{
+		test: Modernizr.geolocation,
+		yep : "geolocation.js",
+		nope: "noGeolocation.js"
+	},
+	{
+		test: Modernizr.localstorage,
+		yep : "localStorage.js",
+		nope: "noLocalStorage.js",
+		complete: function() {
+			init();
+		}
+	}
+]);
+</script>
+
+</head>
+
+<body>
+	<ul id="features">
+	</ul>
+</body>
+
+</html>

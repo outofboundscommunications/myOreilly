@@ -1,0 +1,65 @@
+<!--
+Update the code you just wrote for Objective 1 to use the style property instead of by adding a class to change the look of the "basic" <div>. In this version, pick your own background-color, border-width, border-style, and border-color values to use.
+
+The existing code sets up a click handler function for the "basic" <div> element so when the user clicks on it, the changeStyle() function is called. It's your job to finish this function.
+
+Remember to use the JavaScript equivalents for the CSS properties to set these properties using the style property with JavaScript. For instance, the CSS background-color property is equivalent to the JavaScript style.backgroundColor property.
+
+In the example below, remove the red code and add code in the blue areas to complete the project.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+ <title> Quiz </title>
+ <meta charset="utf-8">
+ <style>
+ .basic {
+  font-family: Helvetica, Verdana, sans-serif;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+ }
+ 
+
+ </style>
+ <script>
+ window.onload = init;
+ 
+ function init() {
+  var myDiv = document.getElementById("myDiv");		//fetch the div with the "myDiv" ID					
+  myDiv.onclick = changeStyle;		//this time we directly change styles rather than adding classes
+ }
+ 
+
+  function changeStyle() {
+    // your code here to change the background color,
+    // border width, border style, and border color properties.
+	var mybackgroundColor = 
+	myDiv.style.backgroundColor = "red";
+	myDiv.style.borderWidth = "5px";
+	myDiv.style.borderStyle = "solid";
+	myDiv.style.borderColor = "blue";
+	
+  }
+  
+  function showHide(el)	{
+	 var divClass = el.getAttribute("class");	//how can i use this code block to 'reset' the style changes?
+	 if (divClass == "basic")	{
+		 el.setAttribute('class', 'basic red');
+	 }
+	 else	{
+		 el.setAttribute('class', 'basic');
+	 }
+ }
+ 
+ </script>
+</head>
+<body>
+ <div id="myDiv" class="basic">
+  Click to make me red!
+ </div>  
+</body>
+</html>
+ 

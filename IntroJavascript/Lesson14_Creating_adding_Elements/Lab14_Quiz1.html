@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Lab 14 quiz 1 - question 1</title>
+<script>
+
+window.onload = init;
+                
+	function init() {
+	  var myButton = document.getElementById("myButton");
+	  myButton.onclick = addTheH1Header;
+	}
+
+	function addTheH1Header()	{
+		var myHeader = document.getElementById("header"); // get the header element from DOM,store in myHeader
+		var h1 = document.createElement("h1");			//pass in tag name we want into the .createElement() method
+		h1.innerHTML = "My H1 Header text!";			// use .innerHTML method to set content of that <h1> element
+		if (myHeader.childElementCount ==0)	{		// if no child element (<h1>) there, append (display) <h1> header to screen
+			myHeader.appendChild(h1);
+		}
+		
+		else	{									// if child element there, insert this new <h1> before
+			if (myHeader.childElementCount ==1) {	
+				myHeader.insertBefore(h1,myHeader.firstChild);
+				}
+			else	{
+				alert("sorry, you can only insert one header!");
+				alert("reload page to try again.");
+				}
+			}
+	}
+		
+</script>
+</head>
+
+<body>
+
+<div id="container">
+
+<header id="header">
+
+<h2>Second Header</h2>
+</header>
+
+<article id="1_31_2012"> 
+<p>my article 01-31-2012</p>
+</article>
+
+<article id="1_23_2012"> 
+<p>first paragraph</p>
+<p>second paragraph</p>
+</article>
+
+<button type="button" id="myButton" style="width:105px;">Create H1 Header</button>
+
+</div>
+
+</body>
+</html>

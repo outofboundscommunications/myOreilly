@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<!--Write a JavaScript program to get the value of the radio button input and display the chosen color in the "results" <div> when the user clicks Submit. Use the forms collection to access the form, and the elements collection to access the "color" radio button group of elements.-->
+
+ <title> Favorite Colors </title>
+ <meta charset="utf-8">
+ <script>
+ 
+    window.onload = init;
+    function init() {
+      var submitButton = document.getElementById("submitButton");
+      submitButton.onclick = getData;
+    }
+	
+	 function getData() {
+      var theForm = document.forms.theForm;
+      var color = theForm.elements.color.value;
+
+      var results = document.getElementById("results");
+  
+      var colorArray = theForm.elements.color;
+      for (var i = 0; i < colorArray.length; i++) {
+        if (colorArray[i].checked) {
+          results.innerHTML = "The color chosen is: " + colorArray[i].value + "<br>";
+        }
+
+      }
+    }
+
+ </script>
+ </head>
+<body>
+ <h1>Color Chooser</h1>
+ <form id="theForm">
+ <p>Choose your favorite color: </p>
+ <input type="radio" id="blue" name="color" value="blue">
+ <label for="blue">Blue</label>
+ <input type="radio" id="red" name="color" value="red">
+ <label for="green">Red</label>
+ <input type="radio" id="green" name="color" value="green">
+ <label for="green">green</label>
+ <br><br>
+ <input type="button" id="submitButton" value="Go!"><br>
+ </form> 
+ <h1>Results</h1> 
+ <div id="results">
+ </div>
+</body>
+</html> 

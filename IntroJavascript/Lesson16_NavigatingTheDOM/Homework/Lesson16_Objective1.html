@@ -1,0 +1,104 @@
+<!--Write a web application to add items to a list using a form text input and button, and allow the user to delete an item from the list by clicking on it.
+
+You've learned all the methods you'll need to implement the web application. You'll find the HTML for the web application below.
+
+The only tricky part you haven't seen exactly before is how to add a click handler to an element you're creating in JavaScript. You can add a click handler to an element object after you create it, just like we've been adding click handlers to buttons!-->
+
+<!doctype html>
+<html lang="en">
+<head>
+ <title> Lesson 16 - Navigation the DOM - Objective 1 </title>
+ <meta charset="utf-8">
+
+ <style>
+ p {
+  font-style: italic;
+  font-weight:bold;
+ }
+ li:hover {
+  cursor: pointer;
+  text-decoration:underline;
+  font-weight:bold;
+  
+ }
+ </style>
+ <script>
+ 
+ 	window.onload = init;
+	
+	function init() {
+		// select the 'add' button and store in myButton
+		// add click handler function processListItem() 
+		var myButton = document.getElementById("submitButton"); 
+		myButton.onclick = getFormInput;
+	}
+ 	
+	function getFormInput()	{
+		// grab the value of the text input from form
+		// perform validation for null/blank
+		var formInput = document.getElementById("item");
+		var getItem = formInput.value;
+		if (getItem == null || getItem == '')	{
+			alert("Please enter a list item!");
+			return;
+		}
+		else	{
+			// okay, form value okay so call addListItem() subfunction to add to <ul>
+			// first we call add the form value to the <ul> as a <li> item
+			addListItem(getItem);
+			// then we add a click event to the new list item
+			addClickEvent(getItem);
+			// now we reset the form for the next data entry
+			var theForm = document.getElementById("theForm");
+			theForm.reset();
+		}
+	}
+	
+	function addListItem(theItem) {
+		// this is the function that appends the form input as <li> elements
+		  var addItem = theItem;
+		  window.console.log('i am adding list item');
+		  var theList = document.getElementById("myList");
+		  var li = document.createElement("li");
+		  li.innerHTML = addItem;
+		  theList.appendChild(li);
+		  li.innerHTML += '<br>';
+		}
+		
+	function removeListItem(e)	{
+		// this function removes the list item user clicks on
+		// this is the function called when someone clicks on any of the list items
+		// first we set the target of the click event to variable called "removeItem"
+		var removeItem = e.target;
+		// then we find the parent of that item and assign it to the 'removeItemParent' variable
+		var removeItemParent = removeItem.parentElement;
+		window.console.log('i am removing the list item!');
+		// now we remove the child of that parent with the removeChild method
+		removeItemParent.removeChild(removeItem);
+		
+	}
+
+	
+	function addClickEvent(theItem)	{
+		//now we need to add a click event to all the list items created so far
+		var item = document.querySelectorAll("li");
+		for (var i = 0; i < item.length; i++)	{
+			item[i].onclick =removeListItem;
+		}
+	}
+     
+ </script>
+</head>
+<body>
+
+ <form id='theForm'>
+ <label for="item">Add an item: </label>
+  <input id="item" type="text" size="20"><br>
+ <input id="submitButton" type="button" value="Add!">
+ </form>
+ <ul id="myList"> <!--empty unordered list - where we add/delete list items --></ul>
+ 
+ <p>Click an item to remove it from the list.</p>  
+ 
+</body>
+</html>

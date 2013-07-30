@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <title>Pet Objects and Methods</title>
+  <meta charset="utf-8">
+ <script>
+ /*
+	Objective 2:
+	Add a method named getLikes() to the Pet object that returns a string containing the values of the likes array. Then use this method to update your web page so the "pets" <div> displays a string like "Willie likes slobbering, panting, eating." Notice there is a comma inserted between the items from the likes array.
+	Include comments in the code explaining what you're doing and why.
+	Submit your file once you have it working.
+  */
+ 
+ window.onload = init;
+ 
+ function Pet(type, name, weight, likes, sound) {	//Pet Object Constructor
+  this.type = type;
+  this.name = name;
+  this.weight = weight;
+  this.likes = likes;
+  this.sound = sound;
+  
+  this.speak = function(howMany) {					//method within Pet Object, pass in how many repetitions of sound
+  	var says = "";
+  	for (var i = 0; i < howMany; i++) {
+   		says += this.sound + " ";
+  		}
+  	return says;
+  	};
+	
+    this.getLikes = function()	{			//method within Pet Object that displays all the likes of the pet object
+	 var theLikes = "";						//create a variable that will hold the text values of the likes object
+	 for (var i = 0; i < this.likes.length; i++)	{
+	 	if (i < this.likes.length - 1) 	{
+			theLikes += this.likes[i] + ",";	// add comma between values unless end of object
+		}
+		else 	{
+			theLikes +=this.likes[i] + ".";	// then just add a period
+			}
+	 	}
+	 return theLikes;					// return the text string
+  	};
+ }
+
+   function init() {
+      var annie = new Pet("cat", "Annie", 6, ["sleeping", "teasing pickles"],"meow");
+      var willie = new Pet("dog", "Willie", 45, ["slobbering", "panting", "eating"],"ruff");
+      
+      var div = document.getElementById("pets");
+      div.innerHTML = willie.name + " says " + willie.speak(5) + "while " + willie.getLikes();
+    }
+
+   
+ </script>
+</head>
+<body>
+ <div id="pets">
+ </div> 
+</body>
+</html> 

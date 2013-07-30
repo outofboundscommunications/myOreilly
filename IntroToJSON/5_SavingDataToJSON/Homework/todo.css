@@ -1,0 +1,24 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	font-family: Helvetica, Ariel, sans-serif;
+} 
+
+legend {
+	font-weight: bold;
+} 
+div.tableContainer {
+	display: table;
+	border-spacing: 5px;
+} 
+div.tableRow {
+	display: table-row;
+} 
+div.tableRow label {
+	display: table-cell;
+	text-align: right;
+} div.tableRow input {
+	display: table-cell;
+}
+

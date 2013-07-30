@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Lab 14 quiz 1 - question 1</title>
+<script>
+
+window.onload = init;
+                
+	function init() {
+	  var myButton = document.getElementById("myButton");	// get button element fromm DOM, assign to variable myButton
+	  var myOtherButton = document.getElementById("myOtherButton");
+	  myButton.onclick = addTheH1Header;					//on click event, call the addTheH1Header() function
+	  myOtherButton.onclick = appendParagraphToArticle;
+	}
+
+	function addTheH1Header()	{
+		var myHeader = document.getElementById("header"); // get the header element from DOM,store in myHeader
+		var h1 = document.createElement("h1");			//pass in tag name we want into the .createElement() method
+		h1.innerHTML = "My H1 Header text!";			// use .innerHTML method to set content of that <h1> element
+		if (myHeader.childElementCount ==0)	{		// if no child element (<h1>) there, append (display) <h1> header to screen
+			myHeader.appendChild(h1);
+		}
+		
+		else	{									// if child element there, insert this new <h1> before existing header element
+			if (myHeader.childElementCount ==1) {	// but only insert if there is only one element there
+				myHeader.insertBefore(h1,myHeader.firstChild);
+				}
+			else	{								// if <h1> already there, display alert message
+				alert("sorry, you can only insert one H1 header!");
+				alert("reload page to reset and try again.");
+				}
+			}
+	}
+	
+	function appendParagraphToArticle()	{
+		var myArticle = document.getElementById("1_23_2012"); // get the article ID 1-31-2012 element from DOM,store in myArticle
+		var p = document.createElement("p");			//pass in tag name we want to create in .createElement() method
+		p.innerHTML = "My New Paragraph!";			// use .innerHTML method to set content of that <p> element
+		if (myArticle.childElementCount ==0)	{		// if no child <p> element there, append (display) <p> to screen
+			myArticle.appendChild(p);
+		}
+		
+		else	{									// if child <p> element there, append this new <p> after existing <p> elements
+			myArticle.appendChild(p);
+				}
+	}
+		
+</script>
+</head>
+
+<body>
+
+<div id="container">
+
+<header id="header">
+
+<h2>Second Header</h2>
+</header>
+
+<article id="1_31_2012"> 
+</article>
+
+<article id="1_23_2012"> 
+<p>first paragraph</p>
+<p>second paragraph</p>
+</article>
+
+<button type="button" id="myButton" style="width:105px;">Insert New H1 Header</button>
+<button type="button" id="myOtherButton" style="width:105px;">Append Paragraph</button>
+
+</div>
+
+</body>
+</html>
