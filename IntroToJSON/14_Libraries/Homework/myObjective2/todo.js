@@ -144,7 +144,7 @@ function getFormData() {
     var date = document.getElementById("dueDate").value;
     if (checkInputText(date, "Please enter a due date")) return;
 	
-	//split thedateString into a date and string components and grab the date 
+	//split thedateString into a date and string components and grab the date so we can validate it
 	var results = date.split(" ");
 	var aDateString = results[0];
 	//try to parse myDateString into a date, if you can, then string is valid date format
@@ -153,11 +153,12 @@ function getFormData() {
 	console.log("log the date component in milliseconds: " + "Date: " + aDateMillis);
 	
 	try {
-		if (isNaN(aDateMillis)) {
+		//if aDateMillis is not a date or it is less than zero, throw exception
+		if ( (isNaN(aDateMillis)) || (aDateMillis <0 )  ){
 			throw new Error("Date format error. Please enter the date in the format MM/DD/YYYY, YYYY/MM/DD, or January");
 		}
 		else {
-			//convert the date in milliseconds to a real date object
+			//date is valid format so convert the date in milliseconds to a real date object
 			aDate = new Date(aDateMillis);
 			console.log(aDate);
 		}
@@ -172,7 +173,6 @@ function getFormData() {
     var todoItem = new Todo(id, task, who, date, dueDateFromToday);
 	//pass todoItem to function so we calculate diff between current date and due date
 	calculateDueDate(todoItem);
-    var todoItem = new Todo(id, task, who, date);
     todos.push(todoItem);
     addTodoToPage(todoItem);
     saveTodoItem(todoItem);
