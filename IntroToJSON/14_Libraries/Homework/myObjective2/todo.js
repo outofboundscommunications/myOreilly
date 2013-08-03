@@ -162,25 +162,24 @@ function getFormData() {
 			//date is valid format so convert the date in milliseconds to a real date object
 			aDate = new Date(aDateMillis);
 			console.log(aDate);
+			var id = (new Date()).getTime();
+			//need to initialize the value of the dueDateFromToday variable, we use this later to calculate difference
+			//from due date and current date
+			var dueDateFromToday = 0; 
+			var todoItem = new Todo(id, task, who, date, dueDateFromToday);
+			//pass todoItem to function so we calculate diff between current date and due date
+			calculateDueDate(todoItem);
+			todos.push(todoItem);
+			addTodoToPage(todoItem);
+			saveTodoItem(todoItem);
+		
+			// hide search results
+			hideSearchResults();
 		}
 		}
 	catch (ex) {
 		alert(ex.message);
 	}
-	
-	var id = (new Date()).getTime();
-	//need to initialize the value of the dueDateFromToday variable, we use this later to calculate difference
-	//from due date and current date
-	var dueDateFromToday = 0; 
-    var todoItem = new Todo(id, task, who, date, dueDateFromToday);
-	//pass todoItem to function so we calculate diff between current date and due date
-	calculateDueDate(todoItem);
-    todos.push(todoItem);
-    addTodoToPage(todoItem);
-    saveTodoItem(todoItem);
-
-    // hide search results
-    hideSearchResults();
 	
 }
 
