@@ -37,12 +37,10 @@ function getTodoItems() {
 				calculateDueDate(todoItem);
 				//log to console the value of the difference
 				console.log(todoItem.dueDateFromToday);
+				//push the todo Item to the array
                 todos.push(todoItem);
             }
         }
-        //before we add to page, need to calculate time till due date
-		//function to calculate due date for each object
-		//calculateDueDate();
 		//now add the todos to the page
 		addTodosToPage();
     }
@@ -145,23 +143,43 @@ function getFormData() {
 
     var date = document.getElementById("dueDate").value;
     if (checkInputText(date, "Please enter a due date")) return;
-    
-	// later, process date here
-	//first we want to test to see if the date is in the correct format
-
-    var id = (new Date()).getTime();
+	
+	//split thedateString into a date and string components and grab the date 
+	var results = date.split(" ");
+	var aDateString = results[0];
+	//try to parse myDateString into a date, if you can, then string is valid date format
+	//assign the date to a myDateMillis variable (millis = milliseconds)
+	var aDateMillis = Date.parse(aDateString);
+	console.log("log the date component in milliseconds: " + "Date: " + aDateMillis);
+	
+	try {
+		if (isNaN(aDateMillis)) {
+			throw new Error("Date format error. Please enter the date in the format MM/DD/YYYY, YYYY/MM/DD, or January");
+		}
+		else {
+			//convert the date in milliseconds to a real date object
+			aDate = new Date(aDateMillis);
+			console.log(aDate);
+		}
+		}
+	catch (ex) {
+		alert(ex.message);
+	}
+	var id = (new Date()).getTime();
 	//need to initialize the value of the dueDateFromToday variable, we use this later to calculate difference
 	//from due date and current date
 	var dueDateFromToday = 0; 
     var todoItem = new Todo(id, task, who, date, dueDateFromToday);
 	//pass todoItem to function so we calculate diff between current date and due date
 	calculateDueDate(todoItem);
+    var todoItem = new Todo(id, task, who, date);
     todos.push(todoItem);
     addTodoToPage(todoItem);
     saveTodoItem(todoItem);
 
     // hide search results
     hideSearchResults();
+	
 }
 
 function checkInputText(value, msg) {
@@ -298,49 +316,3 @@ function showSearchResults() {
     document.forms[0].reset();
 }  
 
-//functions for processing/validating the dates input by the user 
-function processDate(dateTime)	{
-	console.log("log the value taken from the form: " + dateTime);
-	//split the date, time string into two parts, date and time
-	//we are going to validate each component with a match against our RegEx
-	console.log("now split the string");
-	var results = dateTime.split(" ");
-	//assign the date to myDate variable
-	var myDate = results[0];
-	//assign the time to myTime variable
-	var myTime = results[1];
-	console.log("log the date component: " + "Date: " + myDate);
-	//use regex to see if date is in the format we want
-	//create the regular expression object to match the date in this format: YYYY.MM.DD 
-	console.log("run the match function using the DateRegEx and log result");
-	var myDateRegEx = new RegExp("[1-9][0-9][0-9][0-9]\.[0-9][0-9]\.[0-9][0-9]","ig")
-	//var myRegEx = new RegExp("[1-9][0-9][0-9][0-9]\.[0-9][0-9]\.[0-9][0-9]\s[1-12]:[0-59][am|pm]","ig")
-	var myDateResults = myDate.match(myDateRegEx);
-	//if the length of the array is zero, then the date didnt match
-	//and we display an alert
-	if (myDateResults == null)	{
-		alert("sorry the date is not in the right format!");
-	}
-	//date format validated, now go on to validating time
-	else	{
-		console.log('the date looks valid, lets now check the time');
-		processTime(myTime);
-	}
-}
-function processTime(myTime)	{
-	//use regex to see if time is in the format we want
-	//create the regular expression object to match the time in this format: hh.mmam/pm 
-	console.log("log the time component: " + "Time: " + myTime);
-	var myTimeRegEx = new RegExp("(10|11|12|0?[1-9]):[0-5][0-9](am|pm)", "ig");
-	//var myRegEx = new RegExp("[1-9][0-9][0-9][0-9]\.[0-9][0-9]\.[0-9][0-9]\s[1-12]:[0-59][am|pm]","ig")
-	console.log("run the match function using the TimeRegEx and log result");
-	var myTimeResults = myTime.match(myTimeRegEx);
-	console.log(myTimeResults);
-	if (myTimeResults == null)	{
-		alert("sorry the time is not in the right format!");
-	}
-	//time format validated, so now both date and time validated, so display results
-	else	{
-		alert('yes, the date/time is valid!');
-	}
-}
