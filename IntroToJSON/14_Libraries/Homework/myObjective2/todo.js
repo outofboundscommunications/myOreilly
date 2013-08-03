@@ -155,7 +155,8 @@ function getFormData() {
 	try {
 		//if aDateMillis is not a date or it is less than zero, throw exception
 		if ( (isNaN(aDateMillis)) || (aDateMillis <0 )  ){
-			throw new Error("Date format error. Please enter the date in the format MM/DD/YYYY, YYYY/MM/DD, or January");
+			throw new Error("Date format error. Please enter the date in the format MM/DD/YYYY");
+			return;
 		}
 		else {
 			//date is valid format so convert the date in milliseconds to a real date object
@@ -166,6 +167,7 @@ function getFormData() {
 	catch (ex) {
 		alert(ex.message);
 	}
+	
 	var id = (new Date()).getTime();
 	//need to initialize the value of the dueDateFromToday variable, we use this later to calculate difference
 	//from due date and current date
