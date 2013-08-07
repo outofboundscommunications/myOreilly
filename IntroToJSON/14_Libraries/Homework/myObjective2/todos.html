@@ -14,6 +14,19 @@ Support a basic text search over the "task" and "who" fields (so I can search by
    		(1) due date earlier than today
         (2) due date not the right format (right now you can enter 01/01/201
 6.Support Geolocation, so a task has a location associated with it.
+	notes: depending on browser support, will need to use the modernzr 'yep', nope' switch to load to different versions of todo.js
+    -one that uses local storage and one that doesnt, one that uses geo and one that doesnt
+    will need to add this code block in todo.html
+    Modernizr.load({
+		test: Modernizr.geolocation,
+		yep : "geolocation.js",
+		nope: "noGeolocation.js",
+		//in either case, we load the features.js (which has features not depending on geo
+		both: "features.js",
+		//the after testing complete, we run init()
+		complete: function() {
+			init();
+		}
 7.Use Modernizr to separate Local Storage and Geolocation code from the main code. Your application should still function properly (although, obviously, with less capability) even if Local Storage and Geolocation are not supported.
 
 Below, we've included code you can begin with if you don't want to use your existing code. You'll add any new features listed above to the code below (which is from the Strings lab).
