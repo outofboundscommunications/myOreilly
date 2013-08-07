@@ -1,3 +1,4 @@
+console.log('we are now in the nogeolocation.js file');
 function findLocation() {
-	addFeature("This experience does NOT use Geolocation!Sorry, we can't get your location! No Geolocation available.");
+	addFeature("Sorry, we can't get your location! No Geolocation available.");
 }
