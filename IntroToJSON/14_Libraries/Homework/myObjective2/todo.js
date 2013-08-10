@@ -2,6 +2,7 @@
 // You can use this code as your starting point, or continue with
 // your own code.
 //
+console.log('we are in the beginning of the todo.js file');
 function Todo(id, task, who, dueDate, dueDateFromToday) {
     this.id = id;
     this.task = task;
@@ -13,8 +14,6 @@ function Todo(id, task, who, dueDate, dueDateFromToday) {
 
 var todos = new Array();
 
-window.onload = init;
-
 function init() {
     var submitButton = document.getElementById("submit");
     submitButton.onclick = getFormData;
@@ -22,34 +21,12 @@ function init() {
     // get the search term and call the click handler
     var searchButton = document.getElementById("searchButton");
     searchButton.onclick = searchTodos;
-
-    getTodoItems();
+	console.log('we are in the init function');
 }
 
-function getTodoItems() {
-    if (localStorage) {
-        for (var i = 0; i < localStorage.length; i++) {
-            var key = localStorage.key(i);
-            if (key.substring(0, 4) == "todo") {
-                var item = localStorage.getItem(key);
-				var todoItem = JSON.parse(item);
-				//pass todoItem to function so we calculate diff between current date and due date
-				calculateDueDate(todoItem);
-				//log to console the value of the difference
-				console.log(todoItem.dueDateFromToday);
-				//push the todo Item to the array
-                todos.push(todoItem);
-            }
-        }
-		//now add the todos to the page
-		addTodosToPage();
-    }
-    else {
-        console.log("Error: you don't have localStorage!");
-    }
-}
 //function to calculate difference between current and due date for todo items
 function calculateDueDate(todoItem)	{
+	console.log('we are in the calculateDueDate(todoItem) function');
 	//figure out current date and store in variable
 	var now = new Date();
 	//retrive the due date from the todo Item object
@@ -58,7 +35,7 @@ function calculateDueDate(todoItem)	{
 	var dueDate = Date.parse(dueDateString);
 	//create a new date object from the dueDate (which is parsed into milliseconds)
 	var aDueDate = new Date(dueDate);
-	console.log('we are in the calcDueDate function, the due date of the item is: ',aDueDate);
+	console.log('the due date of the item is: ',aDueDate);
 	//calculate how many days till overdue
 	var diff = aDueDate - now;
 	//convert to days
@@ -75,6 +52,7 @@ function calculateDueDate(todoItem)	{
 		
 }
 
+//this is used for adding the todos that are stored in local storage from prior user input
 function addTodosToPage() {
     var ul = document.getElementById("todoList");
     var listFragment = document.createDocumentFragment();
@@ -86,6 +64,7 @@ function addTodosToPage() {
     ul.appendChild(listFragment);
 }
 
+//this is used for adding individual todos that the user inputs via the form (after initial page load and stored todos are added)
 function addTodoToPage(todoItem) {
     var ul = document.getElementById("todoList");
     var li = createNewTodo(todoItem);
@@ -123,10 +102,12 @@ function createNewTodo(todoItem) {
     var spanDelete = document.createElement("span");
     spanDelete.setAttribute("class", "delete");
     spanDelete.innerHTML = "&nbsp;&#10007;&nbsp;";
-
     // add the click handler to delete
     spanDelete.onclick = deleteItem;
-
+	
+	// the map gets added here somehow....
+	
+	
     li.appendChild(spanDone);
     li.appendChild(spanTodo);
     li.appendChild(spanDelete);
@@ -191,7 +172,7 @@ function checkInputText(value, msg) {
     return false;
 }
 
-function saveTodoItem(todoItem) {
+/*function saveTodoItem(todoItem) {
     if (localStorage) {
         var key = "todo" + todoItem.id;
         var item = JSON.stringify(todoItem);
@@ -200,7 +181,7 @@ function saveTodoItem(todoItem) {
     else {
         console.log("Error: you don't have localStorage!");
     }
-}
+}*/
 
 function updateDone(e) {
     var span = e.target;
