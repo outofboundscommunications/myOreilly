@@ -1,27 +1,37 @@
 // To do list application with Search (from the Strings lab)
 // You can use this code as your starting point, or continue with
 // your own code.
-//
-console.log('we are in the beginning of the todo.js file');
-function Todo(id, task, who, dueDate, dueDateFromToday) {
+
+function Todo(id, task, who, dueDate, dueDateFromToday,userLat,userLong) {
     this.id = id;
     this.task = task;
     this.who = who;
     this.dueDate = dueDate;
 	this.dueDateFromToday = dueDateFromToday;
     this.done = false;
+	this.latitude = latitude;
+	this.longitude = longitude;
 }
 
 var todos = new Array();
 
+//declare global variables so we can get and operate on the user's location 
+var latitude;
+var longitude;
+
+
 function init() {
+   //this init() function is not called until all the modernizr tests are done (see todos.html)
     var submitButton = document.getElementById("submit");
     submitButton.onclick = getFormData;
 
     // get the search term and call the click handler
     var searchButton = document.getElementById("searchButton");
     searchButton.onclick = searchTodos;
-	console.log('we are in the init function');
+
+	//all the tests are done by modernizr, lets find the location of the user
+	//if the modernizr test resulted in 'nogeolocation.js' being loaded, all that happens is a log to console about no support for geo
+	//if the modernizr test resulted in 'geolocation.js' being loaded, then the location of the user is stored in the todo object
 }
 
 //function to calculate difference between current and due date for todo items
@@ -54,7 +64,8 @@ function calculateDueDate(todoItem)	{
 
 //this is used for adding the todos that are stored in local storage from prior user input
 function addTodosToPage() {
-    var ul = document.getElementById("todoList");
+    console.log('we are in the addTodostoPage() function');
+	var ul = document.getElementById("todoList");
     var listFragment = document.createDocumentFragment();
     for (var i = 0; i < todos.length; i++) {
         var todoItem = todos[i];
@@ -66,14 +77,16 @@ function addTodosToPage() {
 
 //this is used for adding individual todos that the user inputs via the form (after initial page load and stored todos are added)
 function addTodoToPage(todoItem) {
-    var ul = document.getElementById("todoList");
+    console.log('we are in the addTodotoPage() function');
+	var ul = document.getElementById("todoList");
     var li = createNewTodo(todoItem);
     ul.appendChild(li);
     document.forms[0].reset();
 }
 
 function createNewTodo(todoItem) {
-    var li = document.createElement("li");
+    console.log('we are in the createNewTodo() function');
+	var li = document.createElement("li");
     li.setAttribute("id", todoItem.id);
 	var dueDateFromTodayText = "";
 	if (todoItem.dueDateFromToday > 0 )	{
@@ -105,10 +118,13 @@ function createNewTodo(todoItem) {
     // add the click handler to delete
     spanDelete.onclick = deleteItem;
 	
-	// the map gets added here somehow....
+	// add map coordinates where user is/was when todo created
+	var spanMap = document.createElement("span");
+	spanMap.innerHTML = "(" + "38.41096, -122.84505" +") ";
 	
-	
+	//now attach all those elements to the list item
     li.appendChild(spanDone);
+	li.appendChild(spanMap);
     li.appendChild(spanTodo);
     li.appendChild(spanDelete);
 
@@ -116,7 +132,8 @@ function createNewTodo(todoItem) {
 }
 
 function getFormData() {
-    var task = document.getElementById("task").value;
+    console.log('we are in the getFormData() function');
+	var task = document.getElementById("task").value;
     if (checkInputText(task, "Please enter a task")) return;
 
     var who = document.getElementById("who").value;
@@ -147,7 +164,10 @@ function getFormData() {
 			//need to initialize the value of the dueDateFromToday variable, we use this later to calculate difference
 			//from due date and current date
 			var dueDateFromToday = 0; 
-			var todoItem = new Todo(id, task, who, date, dueDateFromToday);
+			//get current location of the user
+			returnLocation(latitude,longitude);
+			console.log('latitude is: ' + latitude + 'longitude is: ' + longitude);
+			var todoItem = new Todo(id, task, who, date, dueDateFromToday,latitude,longitude);
 			//pass todoItem to function so we calculate diff between current date and due date
 			calculateDueDate(todoItem);
 			todos.push(todoItem);
@@ -172,19 +192,9 @@ function checkInputText(value, msg) {
     return false;
 }
 
-/*function saveTodoItem(todoItem) {
-    if (localStorage) {
-        var key = "todo" + todoItem.id;
-        var item = JSON.stringify(todoItem);
-        localStorage.setItem(key, item);
-    }
-    else {
-        console.log("Error: you don't have localStorage!");
-    }
-}*/
-
 function updateDone(e) {
-    var span = e.target;
+    console.log('we are in the updateDone(e) function');
+	var span = e.target;
     var id = span.parentElement.id;
     var item;
     for (var i = 0; i < todos.length; i++) {
@@ -209,7 +219,8 @@ function updateDone(e) {
 }
 
 function deleteItem(e) {
-    var span = e.target;
+    console.log('we are in the deleteItem(e) function');
+	var span = e.target;
     var id = span.parentElement.id;
 
     // find and remove the item in localStorage
@@ -235,7 +246,8 @@ function deleteItem(e) {
 
 // Search
 function searchTodos() {
-    // new search, so clear previous results
+    console.log('we are in the searchTodos() function');
+	// new search, so clear previous results
     clearSearchResultsList();
     // get the text to search for
     var searchTerm = document.getElementById("searchTerm").value;
@@ -269,7 +281,8 @@ function searchTodos() {
 
 // add a search result to the search results list in the page
 function addSearchResultToPage(todoItem) {
-    var ul = document.getElementById("searchResultsList");
+    console.log('we are in the addSearchResultsToPage(todoItem) function');
+	var ul = document.getElementById("searchResultsList");
     var li = document.createElement("li");
     li.innerHTML =
         todoItem.who + " needs to " + todoItem.task + " by " + todoItem.dueDate;
@@ -278,7 +291,8 @@ function addSearchResultToPage(todoItem) {
 
 // clear the previous search results by removing all the children of the "searchResultsList" ul element
 function clearSearchResultsList() {
-    var ul = document.getElementById("searchResultsList");
+    console.log('we are in the clearSearchResultsList function');
+	var ul = document.getElementById("searchResultsList");
     while (ul.firstChild) {
         ul.removeChild(ul.firstChild);
     }
@@ -287,13 +301,15 @@ function clearSearchResultsList() {
 // This is just a nifty trick to show/hide the search results, so we don't show anything
 // unless the user's just searched. Extra credit! :-)
 function hideSearchResults() {
-    var div = document.getElementById("searchResults");
+    console.log('we are in the hideSearchResults function');
+	var div = document.getElementById("searchResults");
     div.style.display = "none";
     clearSearchResultsList();
 }
 
 function showSearchResults() {
-    var div = document.getElementById("searchResults");
+    console.log('we are in the showSearchResults function');
+	var div = document.getElementById("searchResults");
     div.style.display = "block";
     document.forms[0].reset();
 }  

@@ -9,6 +9,7 @@ function findLocation() {
 function displayLocation(position) {
 	var latitude = position.coords.latitude;
 	var longitude = position.coords.longitude;
+	console.log(latitude,longitude);
 	addFeature("Just used Geolocation to get your Lat/Long: " + latitude + ", " + longitude);
 	if (!map) {
 		console.log('inside !map logic');
