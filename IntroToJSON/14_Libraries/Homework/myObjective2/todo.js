@@ -165,7 +165,7 @@ function getFormData() {
 			//from due date and current date
 			var dueDateFromToday = 0; 
 			//get current location of the user
-			returnLocation(latitude,longitude);
+			tryLocation();
 			console.log('latitude is: ' + latitude + 'longitude is: ' + longitude);
 			var todoItem = new Todo(id, task, who, date, dueDateFromToday,latitude,longitude);
 			//pass todoItem to function so we calculate diff between current date and due date

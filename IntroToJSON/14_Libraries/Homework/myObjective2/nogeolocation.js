@@ -1,6 +1,15 @@
 
 console.log('we are now in the nogeolocation.js file');
-function findLocation() {
-	console.log("Sorry, we can't get your location! No Geolocation available.");
+var map = null;
+
+console.log('looks like there is no geolocation support');
+
+/*function tryLocation() {
+	navigator.geolocation.getCurrentPosition(getLocation);
 }
 
+function getLocation(position) {
+	var latitude = position.coords.latitude;
+	var longitude = position.coords.longitude;
+	
+}*/

@@ -1,15 +1,9 @@
 
 var map = null;
 
-function returnLocation(lat,long)	{
-	console.log('starting inside returnLocation()');
-	findLocation;
-	return lat,long;
-}
-
 console.log('looks like there is geolocation support');
 
-function findLocation() {
+function tryLocation() {
 	navigator.geolocation.getCurrentPosition(getLocation);
 }
 
