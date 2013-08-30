@@ -2,7 +2,7 @@
 // You can use this code as your starting point, or continue with
 // your own code.
 
-function Todo(id, task, who, dueDate, dueDateFromToday,userLat,userLong) {
+function Todo(id, task, who, dueDate, dueDateFromToday,latitude, longitude) {
     this.id = id;
     this.task = task;
     this.who = who;
@@ -28,10 +28,8 @@ function init() {
     // get the search term and call the click handler
     var searchButton = document.getElementById("searchButton");
     searchButton.onclick = searchTodos;
-
-	//all the tests are done by modernizr, lets find the location of the user
-	//if the modernizr test resulted in 'nogeolocation.js' being loaded, all that happens is a log to console about no support for geo
-	//if the modernizr test resulted in 'geolocation.js' being loaded, then the location of the user is stored in the todo object
+	console.log('calling tryLocation()...');
+	tryLocation();
 }
 
 //function to calculate difference between current and due date for todo items
@@ -119,12 +117,12 @@ function createNewTodo(todoItem) {
     spanDelete.onclick = deleteItem;
 	
 	// add map coordinates where user is/was when todo created
-	var spanMap = document.createElement("span");
-	spanMap.innerHTML = "(" + "38.41096, -122.84505" +") ";
+	//var spanMap = document.createElement("span");
+	//spanMap.innerHTML = "(" + "38.41096, -122.84505" +") ";
 	
 	//now attach all those elements to the list item
     li.appendChild(spanDone);
-	li.appendChild(spanMap);
+	//li.appendChild(spanMap);
     li.appendChild(spanTodo);
     li.appendChild(spanDelete);
 
@@ -149,39 +147,37 @@ function getFormData() {
 	//assign the date to a myDateMillis variable (millis = milliseconds)
 	var aDateMillis = Date.parse(aDateString);
 	console.log("log the date component in milliseconds: " + "Date: " + aDateMillis);
-	
-	try {
 		//if aDateMillis is not a date or it is less than zero, throw exception
-		if ( (isNaN(aDateMillis)) || (aDateMillis <0 )  ){
-			throw new Error("Date format error. Please enter the date in the format MM/DD/YYYY");
-			return;
-		}
-		else {
-			//date is valid format so convert the date in milliseconds to a real date object
-			aDate = new Date(aDateMillis);
-			console.log(aDate);
-			var id = (new Date()).getTime();
-			//need to initialize the value of the dueDateFromToday variable, we use this later to calculate difference
-			//from due date and current date
-			var dueDateFromToday = 0; 
-			//get current location of the user
-			tryLocation();
-			console.log('latitude is: ' + latitude + 'longitude is: ' + longitude);
-			var todoItem = new Todo(id, task, who, date, dueDateFromToday,latitude,longitude);
-			//pass todoItem to function so we calculate diff between current date and due date
-			calculateDueDate(todoItem);
-			todos.push(todoItem);
-			addTodoToPage(todoItem);
-			saveTodoItem(todoItem);
-		
-			// hide search results
-			hideSearchResults();
-		}
-		}
-	catch (ex) {
-		alert(ex.message);
+	if ( (isNaN(aDateMillis)) || (aDateMillis <0 )  ){
+		alert("Date format error. Please enter the date in the format MM/DD/YYYY");
+		return;
 	}
-	
+	else {
+		//date is valid format so convert the date in milliseconds to a real date object
+		aDate = new Date(aDateMillis);
+		console.log(aDate);
+		var id = (new Date()).getTime();
+		//need to initialize the value of the dueDateFromToday variable, we use this later to calculate difference
+		//from due date and current date
+		var dueDateFromToday = 0; 
+		//pass todoItem to function so we calculate diff between current date and due date
+		calculateDueDate(todoItem);
+		//now, since try location set the lat and long as html elements, we can grab those
+		//and store in variables to pass to the todo object
+		var latitude = document.getElementById('latspan');
+		var theLatitude = latitude.getAttribute('latspan');
+		var longitude = document.getElementById('longspan');
+		var theLongitude = longitude.getAttribute('longspan');
+		console.log('latitude is: ' + theLatitude + 'longitude is: ' + theLongitude);
+
+		var todoItem = new Todo(id, task, who, date, dueDateFromToday,latitude,longitude);
+		console.log(todoItem.latitude, todoItem.longitude, todoItem.task, todoItem.dueDateFromToday);
+		todos.push(todoItem);
+		addTodoToPage(todoItem);
+		saveTodoItem(todoItem);
+		// hide search results
+		hideSearchResults();
+	}
 }
 
 function checkInputText(value, msg) {
