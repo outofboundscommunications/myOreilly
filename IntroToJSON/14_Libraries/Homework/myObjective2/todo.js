@@ -258,10 +258,12 @@ function searchTodos() {
         // it exists for this to do item. If there is no match results, then the 
         // result of match is null, so the "if" test will fail.
         if (todoItem.task.match(re) || todoItem.who.match(re)) {
-            // if we find a match, add the to do item to the search results
+            // if we find a match, add the to do item to the search results 
+			//searchResults.push(todoItem.id);
+			 // add the item to the page
 			addSearchResultToPage(todoItem);
 			//and add the item's map to the page
-			addSearchResultMapToPage(todoItem);
+			//addSearchResultMapToPage(todoItem);
             // keep a count of the number of items we match
             count++;
         }
@@ -273,7 +275,7 @@ function searchTodos() {
         li.innerHTML = "No results!";
         ul.appendChild(li);
     }
-    // show the search results
+	
     showSearchResults();
 }
 
@@ -282,16 +284,16 @@ function addSearchResultToPage(todoItem) {
     console.log('we are in the addSearchResultsToPage(todoItem) function');
 	var ul = document.getElementById("searchResultsList");
     var li = document.createElement("li");
+	li.setAttribute("id", todoItem.id);
 	var spanTodo = document.createElement("span");
     spanTodo.innerHTML = todoItem.who + " needs to " + todoItem.task + " by " + todoItem.dueDate + "</br>";
 	var mapDiv = document.createElement("div");
 	mapDiv.setAttribute('id','myMap');
-	//showMap(todoItem.latitude, todoItem.longitude);
-	//spanMap.innerHTML = 'hello map is here';
 	li.appendChild(spanTodo);
 	li.appendChild(mapDiv);
-	//showMap(todoItem.latitude, todoItem.longitude);
     ul.appendChild(li);
+	console.log('calling the addSearchResultMapToPage function...');
+	addSearchResultMapToPage(todoItem);
 	
 }
 // add a search result to the search results list in the page

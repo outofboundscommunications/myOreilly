@@ -36,6 +36,7 @@ function showUserLocation (latitude, longitude)	{
 /////////////////////////////////functions to display map when user does a search ///////////////////////
 
 function showMap(lat, long) {
+	console.log('we are in the showMap function...' + 'the lat and long are: ' + lat + ' ' + long);
 	var googleLatLong = new google.maps.LatLng(lat, long);
 	var mapOptions = {
 		zoom: 12,
