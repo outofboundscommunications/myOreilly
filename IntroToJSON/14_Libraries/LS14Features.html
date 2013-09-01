@@ -3,33 +3,47 @@
 <head>
 <title>JavaScript Libraries and Feature Detection</title>
 <meta charset="utf-8">
+<!--add the google map api-->
+<!--the sensor=true pair at end tells google we want to use browser geo feature -->
+<style>
+	body {
+		font-family: Arial, sans-serif;
+	}
+	div#map {
+		width: 400px;
+		height: 400px;
+	}
+</style>
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<!--add the modernizr library-->
 <script src="Modernizr.js"></script>
 <script>
-	
-	//testing for both geolocation and local storage
 	Modernizr.load([
-		"features.js",
-	{
-		test: Modernizr.geolocation,
-		yep : "geolocation.js",
-		nope: "noGeolocation.js"
-	},
-	{
-		test: Modernizr.localstorage,
-		yep : "localStorage.js",
-		nope: "noLocalStorage.js",
-		complete: function() {
-			init();
-		}
+	  "features.js",
+	  {
+	  test: Modernizr.geolocation,
+	  yep : "geolocation.js",
+	  nope: "nogeolocation.js"
+	  },
+	  {
+	  test: Modernizr.localstorage,
+	  yep : "localStorage.js",
+	  nope: "noLocalStorage.js",
+	  //The "complete" code is specified in the last test we do ; that is, it will run after all the tests are done, and all the appropriate
+	  //code is loaded.
+	  complete: function() {
+	  	init();
+	  }
 	}
-]);
+	]);
 </script>
-
 </head>
 
 <body>
-	<ul id="features">
-	</ul>
+	<ul id="features"></ul>
+    <h2> Where you are today: </h2>
+<div id="map">
+</div>
 </body>
 
 </html>
