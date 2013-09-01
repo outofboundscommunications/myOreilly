@@ -29,6 +29,7 @@ function saveTodoItem(todoItem) {
     if (localStorage) {
         var key = "todo" + todoItem.id;
         var item = JSON.stringify(todoItem);
+		console.log('we are in the saveTodoItem function...' + ' the todoItem to save is: ' + todoItem);
         localStorage.setItem(key, item);
     }
     else {
@@ -37,4 +38,4 @@ function saveTodoItem(todoItem) {
 }
 //now call the function
 
-getTodoItems();
+//getTodoItems();

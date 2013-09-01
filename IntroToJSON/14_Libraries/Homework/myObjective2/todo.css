@@ -2,8 +2,14 @@
 /* CSS Document */
 
 body {
-	font-family: Helvetica, Ariel, sans-serif;
-} 
+		font-family: Arial, sans-serif;
+	}
+	div#myMap {
+		width: 400px;
+		height: 400px;
+	}
+
+ 
 legend {
 	font-weight: bold;
 } 
@@ -49,4 +55,12 @@ ul#todoList li span.delete {
 	position: absolute;
 	right: 5px;
 	cursor: pointer;
+}
+
+#latspan	{
+	color:#FFF;
+}
+
+#longspan	{
+	color:#FFF;
 }

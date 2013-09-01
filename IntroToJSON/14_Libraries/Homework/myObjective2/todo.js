@@ -15,10 +15,7 @@ function Todo(id, task, who, dueDate, dueDateFromToday,latitude, longitude) {
 
 var todos = new Array();
 
-//declare global variables so we can get and operate on the user's location 
-var latitude;
-var longitude;
-
+var searchResults = new Array();
 
 function init() {
    //this init() function is not called until all the modernizr tests are done (see todos.html)
@@ -28,13 +25,17 @@ function init() {
     // get the search term and call the click handler
     var searchButton = document.getElementById("searchButton");
     searchButton.onclick = searchTodos;
+	
 	console.log('calling tryLocation()...');
 	tryLocation();
+	
+	getTodoItems();
+	
 }
 
 //function to calculate difference between current and due date for todo items
+//pass in the todoItem object
 function calculateDueDate(todoItem)	{
-	console.log('we are in the calculateDueDate(todoItem) function');
 	//figure out current date and store in variable
 	var now = new Date();
 	//retrive the due date from the todo Item object
@@ -43,7 +44,7 @@ function calculateDueDate(todoItem)	{
 	var dueDate = Date.parse(dueDateString);
 	//create a new date object from the dueDate (which is parsed into milliseconds)
 	var aDueDate = new Date(dueDate);
-	console.log('the due date of the item is: ',aDueDate);
+	console.log('we are in the calcDueDate function, the due date of the item is: ',aDueDate);
 	//calculate how many days till overdue
 	var diff = aDueDate - now;
 	//convert to days
@@ -57,7 +58,7 @@ function calculateDueDate(todoItem)	{
 	//update todoItem's element with current due date from today and return
 	todoItem.dueDateFromToday = currentDueDateFromToday;
 	return todoItem;
-		
+
 }
 
 //this is used for adding the todos that are stored in local storage from prior user input
@@ -93,9 +94,12 @@ function createNewTodo(todoItem) {
 	else	{
 		dueDateFromTodayText = " (OVERDUE by " + todoItem.dueDateFromToday+" days)";
 		}
-    var spanTodo = document.createElement("span");
+	var latLongText = todoItem.latitude + " ," + todoItem.longitude;
+	console.log('the lat long is: ' + latLongText);
+	var spanTodo = document.createElement("span");
     spanTodo.innerHTML =
-        todoItem.who + " needs to " + todoItem.task + " by " + todoItem.dueDate + dueDateFromTodayText;
+        todoItem.who + ' needs to ' + todoItem.task + ' by ' + todoItem.dueDate + dueDateFromTodayText   + " Lat: " + todoItem.latitude + 
+		" , Long: " + todoItem.longitude;
     var spanDone = document.createElement("span");
     if (!todoItem.done) {
         spanDone.setAttribute("class", "notDone");
@@ -116,13 +120,8 @@ function createNewTodo(todoItem) {
     // add the click handler to delete
     spanDelete.onclick = deleteItem;
 	
-	// add map coordinates where user is/was when todo created
-	//var spanMap = document.createElement("span");
-	//spanMap.innerHTML = "(" + "38.41096, -122.84505" +") ";
-	
 	//now attach all those elements to the list item
     li.appendChild(spanDone);
-	//li.appendChild(spanMap);
     li.appendChild(spanTodo);
     li.appendChild(spanDelete);
 
@@ -147,39 +146,40 @@ function getFormData() {
 	//assign the date to a myDateMillis variable (millis = milliseconds)
 	var aDateMillis = Date.parse(aDateString);
 	console.log("log the date component in milliseconds: " + "Date: " + aDateMillis);
+	try {
 		//if aDateMillis is not a date or it is less than zero, throw exception
-	if ( (isNaN(aDateMillis)) || (aDateMillis <0 )  ){
-		alert("Date format error. Please enter the date in the format MM/DD/YYYY");
-		return;
+		if ( (isNaN(aDateMillis)) || (aDateMillis <0 )  ){
+			throw new Error("Date format error. Please enter the date in the format MM/DD/YYYY");
+			return;
+		}
+		else {
+			//date is valid format so convert the date in milliseconds to a real date object
+			aDate = new Date(aDateMillis);
+			console.log(aDate);
+			var id = (new Date()).getTime();
+			//need to initialize the value of the dueDateFromToday variable, we use this later to calculate difference
+			//from due date and current date
+			var dueDateFromToday = 0; 
+			//now, since try location set the lat and long as html elements, we can grab those
+			//and store in variables to pass to the todo object
+			var latitude = document.getElementById('latspan').innerHTML;
+			var longitude = document.getElementById('longspan').innerHTML
+			console.log('latitude is: ' + latitude + 'longitude is: ' + longitude);
+			var todoItem = new Todo(id, task, who, date, dueDateFromToday, latitude, longitude);
+			calculateDueDate(todoItem);
+			console.log(todoItem);
+			todos.push(todoItem);
+			addTodoToPage(todoItem);
+			saveTodoItem(todoItem);
+			// hide search results
+			hideSearchResults();
+		}
+		}
+	catch (ex) {
+		alert(ex.message);
 	}
-	else {
-		//date is valid format so convert the date in milliseconds to a real date object
-		aDate = new Date(aDateMillis);
-		console.log(aDate);
-		var id = (new Date()).getTime();
-		//need to initialize the value of the dueDateFromToday variable, we use this later to calculate difference
-		//from due date and current date
-		var dueDateFromToday = 0; 
-		//pass todoItem to function so we calculate diff between current date and due date
-		calculateDueDate(todoItem);
-		//now, since try location set the lat and long as html elements, we can grab those
-		//and store in variables to pass to the todo object
-		var latitude = document.getElementById('latspan');
-		var theLatitude = latitude.getAttribute('latspan');
-		var longitude = document.getElementById('longspan');
-		var theLongitude = longitude.getAttribute('longspan');
-		console.log('latitude is: ' + theLatitude + 'longitude is: ' + theLongitude);
 
-		var todoItem = new Todo(id, task, who, date, dueDateFromToday,latitude,longitude);
-		console.log(todoItem.latitude, todoItem.longitude, todoItem.task, todoItem.dueDateFromToday);
-		todos.push(todoItem);
-		addTodoToPage(todoItem);
-		saveTodoItem(todoItem);
-		// hide search results
-		hideSearchResults();
-	}
 }
-
 function checkInputText(value, msg) {
     if (value == null || value == "") {
         alert(msg);
@@ -259,7 +259,9 @@ function searchTodos() {
         // result of match is null, so the "if" test will fail.
         if (todoItem.task.match(re) || todoItem.who.match(re)) {
             // if we find a match, add the to do item to the search results
-            addSearchResultToPage(todoItem);
+			addSearchResultToPage(todoItem);
+			//and add the item's map to the page
+			addSearchResultMapToPage(todoItem);
             // keep a count of the number of items we match
             count++;
         }
@@ -280,10 +282,24 @@ function addSearchResultToPage(todoItem) {
     console.log('we are in the addSearchResultsToPage(todoItem) function');
 	var ul = document.getElementById("searchResultsList");
     var li = document.createElement("li");
-    li.innerHTML =
-        todoItem.who + " needs to " + todoItem.task + " by " + todoItem.dueDate;
+	var spanTodo = document.createElement("span");
+    spanTodo.innerHTML = todoItem.who + " needs to " + todoItem.task + " by " + todoItem.dueDate + "</br>";
+	var mapDiv = document.createElement("div");
+	mapDiv.setAttribute('id','myMap');
+	//showMap(todoItem.latitude, todoItem.longitude);
+	//spanMap.innerHTML = 'hello map is here';
+	li.appendChild(spanTodo);
+	li.appendChild(mapDiv);
+	//showMap(todoItem.latitude, todoItem.longitude);
     ul.appendChild(li);
+	
 }
+// add a search result to the search results list in the page
+function addSearchResultMapToPage(todoItem) {
+    console.log('we are in the addSearchResultMapToPage(todoItem) function');
+	showMap(todoItem.latitude,todoItem.longitude);
+}
+
 
 // clear the previous search results by removing all the children of the "searchResultsList" ul element
 function clearSearchResultsList() {
